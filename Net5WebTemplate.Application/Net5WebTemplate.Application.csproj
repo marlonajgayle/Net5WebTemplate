@@ -8,4 +8,14 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Exceptions\" />
+    <Folder Include="Common\Interfaces\" />
+    <Folder Include="Common\Mappings\" />
+    <Folder Include="Common\Models\" />
+    <Folder Include="Common\Behaviours\" />
+    <Folder Include="HealthChecks\" />
+    <Folder Include="Notifications\" />
+  </ItemGroup>
+
 </Project>
