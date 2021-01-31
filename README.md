@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/marlongayle/NetCoreWebTemplate/_apis/build/status/NetCoreWebTemplate-Build-Pipeline?branchName=master)](https://dev.azure.com/marlongayle/NetCoreWebTemplate/_build/latest?definitionId=1&branchName=master)
+[![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
 
 # .NET 5 Web Template
 A multi-project solution template for creating a an enterprise level using Vue.js and .NET 5 Framework guided by the Clean Architecture princicples.
