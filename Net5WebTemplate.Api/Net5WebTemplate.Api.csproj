@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Net5WebTemplate.Persistence\Net5WebTemplate.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Version1\" />
+    <Folder Include="CustomMiddleware\" />
+    <Folder Include="Routes\Version1\" />
+  </ItemGroup>
+
 </Project>
