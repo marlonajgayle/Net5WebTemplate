@@ -15,7 +15,6 @@
     <Folder Include="Common\Mappings\" />
     <Folder Include="Common\Models\" />
     <Folder Include="Common\Behaviours\" />
-    <Folder Include="HealthChecks\" />
     <Folder Include="Notifications\" />
   </ItemGroup>
 

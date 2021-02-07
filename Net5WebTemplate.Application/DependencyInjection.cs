@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Net5WebTemplate.Application.HealthChecks;
 
 namespace Net5WebTemplate.Application
 {
@@ -6,7 +7,9 @@ namespace Net5WebTemplate.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddHealthChecks();
+            // Register Application Health Checks
+            services.AddHealthChecks()
+                .AddCheck<ApplicationHealthCheck>(name: "Net5WebTemplate API");
 
             return services;
         }
