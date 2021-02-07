@@ -6,6 +6,8 @@ namespace Net5WebTemplate.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            services.AddHealthChecks();
+
             return services;
         }
     }

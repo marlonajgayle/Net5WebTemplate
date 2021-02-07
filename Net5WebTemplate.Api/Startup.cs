@@ -59,6 +59,8 @@ namespace Net5WebTemplate.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Net5WebTemplate.Api v1"));
             }
 
+            app.UseHealthChecks("/health");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
