@@ -40,6 +40,18 @@ namespace Net5WebTemplate.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register and configure CORS
+            services.AddCors(options => 
+            {
+                options.AddPolicy(name: "CorsPolicy",
+                    builder => 
+                    {
+                        builder.WithOrigins("https://localhost")
+                        .WithMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
+                        .AllowCredentials();
+                    });
+            });
+
             // Swagger OpenAPI Configuration
             var swaggerDocOptions = new SwaggerDocOptions();
             Configuration.GetSection(nameof(SwaggerDocOptions)).Bind(swaggerDocOptions);
@@ -102,6 +114,19 @@ namespace Net5WebTemplate.Api
                 });
             }
 
+            // Enable NWebSec Security Headers
+            app.UseXContentTypeOptions();
+            app.UseXXssProtection(options => options.EnabledWithBlockMode());
+            app.UseXfo(options => options.SameOrigin());
+            app.UseReferrerPolicy(options => options.NoReferrerWhenDowngrade());
+
+            // Feature-Policy
+            app.Use(async (context, next) => 
+            {
+                context.Response.Headers.Add("Feature-Policy", "geolocation 'none'; midi 'none';");
+                await next.Invoke();
+            });
+
             // Enable Health Check Middleware
             app.UseHealthChecks("/health", new HealthCheckOptions
             {
@@ -128,6 +153,7 @@ namespace Net5WebTemplate.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
