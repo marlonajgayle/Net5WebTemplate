@@ -8,12 +8,17 @@ namespace Net5WebTemplate.Persistence
     public static class DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
-        {
+        { 
+
+            services.AddHealthChecks()
+                .AddDbContextCheck<Net5WebTemplateDbContext>();
+
             services.AddDbContext<Net5WebTemplateDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Net5WebTemplateDbConnection")));
 
             services.AddScoped<INet5WebTemplateDbContext>(provider => 
                 provider.GetService<Net5WebTemplateDbContext>());
+
 
             return services;
         }
