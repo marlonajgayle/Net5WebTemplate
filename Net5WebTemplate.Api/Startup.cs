@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +17,7 @@ using Net5WebTemplate.Application.HealthChecks;
 using Net5WebTemplate.Infrastructure;
 using Net5WebTemplate.Persistence;
 using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,28 +54,48 @@ namespace Net5WebTemplate.Api
                     });
             });
 
+            // Register and Configure API versioning
+            services.AddApiVersioning(options => 
+            {
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ReportApiVersions = true;
+            });
+
+            //Register and configure API versioning explorer
+            services.AddVersionedApiExplorer(option => 
+            {
+                option.GroupNameFormat = "'v'VVV";
+                option.SubstituteApiVersionInUrl = true;
+            });
+
             // Swagger OpenAPI Configuration
             var swaggerDocOptions = new SwaggerDocOptions();
             Configuration.GetSection(nameof(SwaggerDocOptions)).Bind(swaggerDocOptions);
-
-            services.AddSwaggerGen(swagger =>
-            {
-                swagger.SwaggerDoc(swaggerDocOptions.Version, new OpenApiInfo
+            services.AddSwaggerGen();
+            services.AddOptions<SwaggerGenOptions>()
+                .Configure<IApiVersionDescriptionProvider>((swagger, service) => 
                 {
-                    Title = swaggerDocOptions.Title,
-                    Version = swaggerDocOptions.Version,
-                    Description = swaggerDocOptions.Description,
-                    Contact = new OpenApiContact
+                
+                    foreach (ApiVersionDescription description in service.ApiVersionDescriptions)
                     {
-                        Name = swaggerDocOptions.Organization,
-                        Email = string.Empty
+                        swagger.SwaggerDoc(description.GroupName, new OpenApiInfo
+                        {
+                            Title = swaggerDocOptions.Title,
+                            Version = description.ApiVersion.ToString(),
+                            Description = swaggerDocOptions.Description,
+                            Contact = new OpenApiContact
+                            {
+                                Name = swaggerDocOptions.Organization,
+                                Email = swaggerDocOptions.Email
+                            }
+                        });
                     }
-                });
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                swagger.IncludeXmlComments(xmlPath);
-            });
+                    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                    swagger.IncludeXmlComments(xmlPath);
+                });
 
             // Register InvestEdge.Application Service Configurations
             services.AddApplication();
@@ -86,13 +108,14 @@ namespace Net5WebTemplate.Api
 
             services.AddControllers()
                 .AddNewtonsoftJson()
-                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(options => 
+                    options.RegisterValidatorsFromAssemblyContaining<Startup>());
 
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -110,8 +133,12 @@ namespace Net5WebTemplate.Api
                 // Enable Middelware to serve Swagger UI (HTML, JavaScript, CSS etc.)
                 app.UseSwaggerUI(option =>
                 {
-                    option.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
+                     foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
+                     {
+                         option.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                     }
                 });
+                
             }
 
             // Enable NWebSec Security Headers
@@ -120,7 +147,7 @@ namespace Net5WebTemplate.Api
             app.UseXfo(options => options.SameOrigin());
             app.UseReferrerPolicy(options => options.NoReferrerWhenDowngrade());
 
-            // Feature-Policy
+            // Feature-Policy security header
             app.Use(async (context, next) => 
             {
                 context.Response.Headers.Add("Feature-Policy", "geolocation 'none'; midi 'none';");

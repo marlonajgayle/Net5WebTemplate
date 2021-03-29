@@ -9,6 +9,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
 {
     [Produces("application/json")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class ClientController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -29,7 +30,9 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         /// <returns>Client information details</returns>
         /// <response code="200">Returns client information details</response>
         /// <response code="404">If the client is not found</response>
-        [HttpGet(ApiRoutes.Client.Get)]
+        //[HttpGet(ApiRoutes.Client.Get)]
+        [HttpGet]
+        [Route(ApiRoutes.Client.Get)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int clientId)
