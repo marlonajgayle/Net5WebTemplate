@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Net5WebTemplate.Api.ConfigOptions;
 using Net5WebTemplate.Application;
@@ -19,11 +17,9 @@ using Net5WebTemplate.Persistence;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Api
 {
@@ -43,10 +39,10 @@ namespace Net5WebTemplate.Api
         public void ConfigureServices(IServiceCollection services)
         {
             // Register and configure CORS
-            services.AddCors(options => 
+            services.AddCors(options =>
             {
                 options.AddPolicy(name: "CorsPolicy",
-                    builder => 
+                    builder =>
                     {
                         builder.WithOrigins("https://localhost")
                         .WithMethods("OPTIONS", "GET", "POST", "PUT", "DELETE")
@@ -55,7 +51,7 @@ namespace Net5WebTemplate.Api
             });
 
             // Register and Configure API versioning
-            services.AddApiVersioning(options => 
+            services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -63,7 +59,7 @@ namespace Net5WebTemplate.Api
             });
 
             //Register and configure API versioning explorer
-            services.AddVersionedApiExplorer(option => 
+            services.AddVersionedApiExplorer(option =>
             {
                 option.GroupNameFormat = "'v'VVV";
                 option.SubstituteApiVersionInUrl = true;
@@ -74,9 +70,9 @@ namespace Net5WebTemplate.Api
             Configuration.GetSection(nameof(SwaggerDocOptions)).Bind(swaggerDocOptions);
             services.AddSwaggerGen();
             services.AddOptions<SwaggerGenOptions>()
-                .Configure<IApiVersionDescriptionProvider>((swagger, service) => 
+                .Configure<IApiVersionDescriptionProvider>((swagger, service) =>
                 {
-                
+
                     foreach (ApiVersionDescription description in service.ApiVersionDescriptions)
                     {
                         swagger.SwaggerDoc(description.GroupName, new OpenApiInfo
@@ -108,7 +104,7 @@ namespace Net5WebTemplate.Api
 
             services.AddControllers()
                 .AddNewtonsoftJson()
-                .AddFluentValidation(options => 
+                .AddFluentValidation(options =>
                     options.RegisterValidatorsFromAssemblyContaining<Startup>());
 
 
@@ -133,12 +129,12 @@ namespace Net5WebTemplate.Api
                 // Enable Middelware to serve Swagger UI (HTML, JavaScript, CSS etc.)
                 app.UseSwaggerUI(option =>
                 {
-                     foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
-                     {
-                         option.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-                     }
+                    foreach (ApiVersionDescription description in provider.ApiVersionDescriptions)
+                    {
+                        option.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                    }
                 });
-                
+
             }
 
             // Enable NWebSec Security Headers
@@ -148,7 +144,7 @@ namespace Net5WebTemplate.Api
             app.UseReferrerPolicy(options => options.NoReferrerWhenDowngrade());
 
             // Feature-Policy security header
-            app.Use(async (context, next) => 
+            app.Use(async (context, next) =>
             {
                 context.Response.Headers.Add("Feature-Policy", "geolocation 'none'; midi 'none';");
                 await next.Invoke();

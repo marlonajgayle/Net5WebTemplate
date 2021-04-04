@@ -33,6 +33,6 @@ namespace Net5WebTemplate.Application.Common.Exceptions
             }
         }
 
-       
+
     }
 }
