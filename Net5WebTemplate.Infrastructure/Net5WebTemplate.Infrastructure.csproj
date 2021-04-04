@@ -26,4 +26,8 @@
     <Folder Include="Identity\Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj" />
+  </ItemGroup>
+
 </Project>
