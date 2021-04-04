@@ -20,12 +20,16 @@ namespace Net5WebTemplate.Infrastructure
             services.AddDbContext<ApplicationIdentityDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Net5WebTemplateDbConnection")));
 
+            var identityOptionsConfig = new IdentityOptionsConfig();
+            configuration.GetSection(nameof(IdentityOptionsConfig)).Bind(identityOptionsConfig);
+            
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
-                options.Password.RequiredLength = 10;
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequiredLength = identityOptionsConfig.RequiredLength;
+                options.Password.RequireDigit = identityOptionsConfig.RequiredDigit;
+                options.Password.RequireLowercase = identityOptionsConfig.RequireLowercase;
+                options.Password.RequiredUniqueChars = identityOptionsConfig.RequiredUniqueChars;
+                options.Password.RequireUppercase = identityOptionsConfig.RequireUppercase;
 
             })
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
