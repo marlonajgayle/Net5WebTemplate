@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -39,6 +40,25 @@ namespace Net5WebTemplate.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // needed to load configuration from appsettings.json
+            services.AddOptions();
+
+            // needed to store rate limit counters and ip rules
+            services.AddMemoryCache();
+
+            //load general configuration from appsettings.json
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+
+            // inject counter and rules stores
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+
+            // the clientId/clientIp resolvers use it.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // configuration (resolvers, counter key builders)
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
             // Register and configure CORS
             services.AddCors(options =>
             {
@@ -183,6 +203,9 @@ namespace Net5WebTemplate.Api
                 context.Response.Headers.Add("Feature-Policy", "geolocation 'none'; midi 'none';");
                 await next.Invoke();
             });
+
+            // Enable IP Rate Limiting Middleware
+            app.UseIpRateLimiting();
 
             // Enable Health Check Middleware
             app.UseHealthChecks("/health", new HealthCheckOptions
