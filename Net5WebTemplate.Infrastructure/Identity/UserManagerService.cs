@@ -27,6 +27,12 @@ namespace Net5WebTemplate.Infrastructure.Identity
             return (result.ToApplicationResult(), user.Id);
         }
 
+        public async Task<bool> IsEmailandPasswordValid(string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return await _userManager.CheckPasswordAsync(user, password);
+        }
+
         public async Task<bool> UserExistAsync(string email) 
         {
             var existingUser = await _userManager.FindByEmailAsync(email);

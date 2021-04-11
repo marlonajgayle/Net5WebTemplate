@@ -1,28 +1,32 @@
 ﻿using MediatR;
+using Net5WebTemplate.Application.Common.Exceptions;
 using Net5WebTemplate.Application.Common.Interfaces;
+using Net5WebTemplate.Application.Common.Models;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Application.Account.Commands.Login
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, TokenResult>
     {
-        private readonly ISignInManager _signInManager;
-        public LoginCommandHandler(ISignInManager signInManager)
+        private readonly IUserManager _userManager;
+        private readonly IJwtSecurityTokenManager _securityTokenManager;
+
+        public LoginCommandHandler(IUserManager userManager, IJwtSecurityTokenManager securityTokenManager)
         {
-            _signInManager = signInManager;
+            _userManager = userManager;
+            _securityTokenManager = securityTokenManager;
         }
-        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<TokenResult> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var result = await _signInManager.PasswordSignInAsync(request.Email, request.Password,
-                false, false);
+            var isAuthenticated = await _userManager.IsEmailandPasswordValid(request.Email, request.Password);
 
-            if (!result.Succeeded)
-            { 
-                // throw authentication exception
+            if (!isAuthenticated)
+            {
+                throw new UnauthorizedException($"Invalid email or password for {request.Email}");
             }
-
-            return "Login Successfully.";
+            
+            return await _securityTokenManager.GenerateClaimsTokenAsync(request.Email, cancellationToken);
         }
     }
 }

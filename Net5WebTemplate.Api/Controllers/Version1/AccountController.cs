@@ -55,9 +55,9 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(LoginCommand command)
         {
-            await _mediator.Send(command);
+            var result = await _mediator.Send(command);
 
-            return Ok();
+            return Ok(result);
         }
     }
 }

@@ -226,7 +226,7 @@ namespace Net5WebTemplate.Api
                         Duration = report.TotalDuration
                     };
 
-                    await context.Response.WriteAsync(text: JsonConvert.SerializeObject(response));
+                    await context.Response.WriteAsync(text: JsonConvert.SerializeObject(response, Formatting.Indented));
                 }
             });
 
