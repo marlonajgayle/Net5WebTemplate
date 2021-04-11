@@ -15,9 +15,9 @@ namespace Net5WebTemplate.Application.Account.Commands.RegisterUserAccount
         }
         public async Task<Unit> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
         {
-            var result = await _userManager.CreateUserAsync(request.Email, request.Password);
+            var (Result, userId) = await _userManager.CreateUserAsync(request.Email, request.Password);
 
-            if (result.Result.Succeeded)
+            if (!Result.Succeeded)
             { 
                 // throw custom exception
             }

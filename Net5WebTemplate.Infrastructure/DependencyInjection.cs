@@ -38,9 +38,22 @@ namespace Net5WebTemplate.Infrastructure
             })
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
 
+            // Configure JWT Authentication and Authorization
             var jwtSettings = new JwtSettings();
             configuration.Bind(nameof(JwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                ValidateIssuer = jwtSettings.ValidateIssuer,
+                ValidateAudience = jwtSettings.ValidateAudience,
+                RequireExpirationTime = jwtSettings.RequireExpirationTime,
+                ValidateLifetime = jwtSettings.ValidateLifetime,
+                ClockSkew = jwtSettings.Expiration
+            };
+            services.AddSingleton(tokenValidationParameters);
 
             services.AddAuthentication( options => 
             {
@@ -51,15 +64,8 @@ namespace Net5WebTemplate.Infrastructure
                 .AddJwtBearer(options => 
                 {
                     options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Secret)),
-                        ValidateIssuer = jwtSettings.ValidateIssuer,
-                        ValidateAudience = jwtSettings.ValidateAudience,
-                        RequireExpirationTime = jwtSettings.RequireExpirationTime,
-                        ValidateLifetime = jwtSettings.ValidateLifetime
-                    };
+                    options.TokenValidationParameters = tokenValidationParameters;
+;
                 });
 
             return services;

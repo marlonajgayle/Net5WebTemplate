@@ -9,6 +9,7 @@ namespace Net5WebTemplate.Persistence
     public class Net5WebTemplateDbContext : DbContext, INet5WebTemplateDbContext
     {
         public DbSet<Client> Clients { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public Net5WebTemplateDbContext(DbContextOptions<Net5WebTemplateDbContext> options)
             : base(options)

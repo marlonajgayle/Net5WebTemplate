@@ -13,11 +13,13 @@ namespace Net5WebTemplate.Persistence.Configurations
 
             builder.Property(e => e.FirstName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.LastName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(50)
+                .IsUnicode(false);
         }
     }
 }

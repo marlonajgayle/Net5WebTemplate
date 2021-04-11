@@ -8,6 +8,7 @@ namespace Net5WebTemplate.Application.Common.Interfaces
     public interface INet5WebTemplateDbContext
     {
         DbSet<Client> Clients { get; set; }
+        DbSet<RefreshToken> RefreshTokens { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
