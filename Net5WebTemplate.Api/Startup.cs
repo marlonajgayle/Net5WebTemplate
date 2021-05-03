@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,6 +21,7 @@ using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -55,6 +58,12 @@ namespace Net5WebTemplate.Api
 
             // the clientId/clientIp resolvers use it.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // Register and configure localization services
+            services.AddLocalization(options => options.ResourcesPath = "Localization");
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
             // configuration (resolvers, counter key builders)
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
@@ -190,6 +199,28 @@ namespace Net5WebTemplate.Api
                 });
 
             }
+
+            // List of supported cultures for localization used in RequestLocalizationOptions
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en"),
+                new CultureInfo("es")
+            };
+
+            // Configure RequestLocalizationOptions with supported culture
+            var requestLocalizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en"),
+
+                // Formatting numbers, date etc.
+                SupportedCultures = supportedCultures,
+
+                // UI strings that are localized
+                SupportedUICultures = supportedCultures
+            };
+
+            // Enable Request Localization
+            app.UseRequestLocalization(requestLocalizationOptions);
 
             // Enable NWebSec Security Headers
             app.UseXContentTypeOptions();

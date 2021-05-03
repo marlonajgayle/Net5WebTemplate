@@ -17,6 +17,7 @@ namespace Net5WebTemplate.Infrastructure
             // Register Infrastrucruter Services
             services.AddScoped<IUserManager, UserManagerService>();
             services.AddScoped<ISignInManager, SignInManagerService>();
+            services.AddTransient<IJwtSecurityTokenManager, JwtSecurityTokenManager>();
 
            
 

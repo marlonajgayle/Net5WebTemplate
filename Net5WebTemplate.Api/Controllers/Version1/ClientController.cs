@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Net5WebTemplate.Api.Routes.Version1;
+using Net5WebTemplate.Application;
 using Net5WebTemplate.Application.Clients.Queries.GetClientDetail;
 using System.Threading.Tasks;
 
