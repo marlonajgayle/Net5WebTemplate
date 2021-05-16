@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Infrastructure.Identity;
+using Net5WebTemplate.Infrastructure.Notifications.Email;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 
 namespace Net5WebTemplate.Infrastructure
@@ -19,7 +22,23 @@ namespace Net5WebTemplate.Infrastructure
             services.AddScoped<ISignInManager, SignInManagerService>();
             services.AddTransient<IJwtSecurityTokenManager, JwtSecurityTokenManager>();
 
-           
+            // Register FluentEmail Services
+            var emailConfig = new EmailConfiguration();
+            configuration.GetSection(nameof(EmailConfiguration)).Bind(emailConfig);
+
+            services.AddFluentEmail(defaultFromEmail: emailConfig.Email)
+                .AddRazorRenderer()
+                .AddSmtpSender(new SmtpClient(emailConfig.Host, emailConfig.Port)
+                { 
+                    DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
+                    PickupDirectoryLocation = @"C:\Users\mgayle\email",
+                    //DeliveryMethod = SmtpDeliveryMethod.Network,
+                    //Credentials = new NetworkCredential(emailConfig.Email, emailConfig.Password),
+                    EnableSsl = emailConfig.EnableSsl
+                });
+
+            // Add EmailNotification Service
+            services.AddScoped<IEmailNotification, EmailNotificationService>();
 
             // Register Identity DbContext and Server
             services.AddDbContext<ApplicationIdentityDbContext>(options =>

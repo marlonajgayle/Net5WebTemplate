@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Common\Mappings\" />
-    <Folder Include="Notifications\" />
   </ItemGroup>
 
   <ItemGroup>
