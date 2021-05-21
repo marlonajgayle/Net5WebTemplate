@@ -31,7 +31,7 @@ namespace Net5WebTemplate.Infrastructure
                 .AddSmtpSender(new SmtpClient(emailConfig.Host, emailConfig.Port)
                 { 
                     DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
-                    PickupDirectoryLocation = @"C:\Users\email",
+                    PickupDirectoryLocation = @"C:\Users\mgayle\email",
                     //DeliveryMethod = SmtpDeliveryMethod.Network,
                     //Credentials = new NetworkCredential(emailConfig.Email, emailConfig.Password),
                     EnableSsl = emailConfig.EnableSsl

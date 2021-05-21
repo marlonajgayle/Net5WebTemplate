@@ -38,8 +38,4 @@
     <ProjectReference Include="..\Net5WebTemplate.Persistence\Net5WebTemplate.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CustomMiddleware\" />
-  </ItemGroup>
-
 </Project>

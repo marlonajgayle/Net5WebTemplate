@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Net5WebTemplate.Api.Common;
 using Net5WebTemplate.Api.ConfigOptions;
 using Net5WebTemplate.Application;
 using Net5WebTemplate.Application.HealthChecks;
@@ -261,9 +262,12 @@ namespace Net5WebTemplate.Api
                 }
             });
 
+            app.UseCustomExceptionHandler();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseCors();
 
             app.UseAuthorization();
