@@ -3,9 +3,14 @@ The persistence layer is responsible for defining and managing interactions with
 Entity Framework Core CLI tools manage database migrations.
 
 ## Installing tools
-.NET CLI
+Visual Studio 2019 Package Manager Console
 ```
- dotnet tool install -- global dotnet-ef
+Install-Package Micorsoft.EntityFrameworkCore.Tools
+```
+
+Update EF Core Tools
+```
+Update-Package Micorsoft.EntityFrameworkCore.Tools
 ```
 
 ## Create Migrations
