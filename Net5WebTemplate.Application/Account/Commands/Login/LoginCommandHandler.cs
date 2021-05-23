@@ -14,7 +14,7 @@ namespace Net5WebTemplate.Application.Account.Commands.Login
         private readonly IUserManager _userManager;
         private readonly IJwtSecurityTokenManager _securityTokenManager;
 
-        public LoginCommandHandler(IMediator mediator, IUserManager userManager, 
+        public LoginCommandHandler(IMediator mediator, IUserManager userManager,
             IJwtSecurityTokenManager securityTokenManager)
         {
             _mediator = mediator;

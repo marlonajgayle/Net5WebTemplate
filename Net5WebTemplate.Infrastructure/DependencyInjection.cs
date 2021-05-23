@@ -7,7 +7,6 @@ using Microsoft.IdentityModel.Tokens;
 using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Infrastructure.Identity;
 using Net5WebTemplate.Infrastructure.Notifications.Email;
-using System.Net;
 using System.Net.Mail;
 using System.Text;
 
@@ -29,7 +28,7 @@ namespace Net5WebTemplate.Infrastructure
             services.AddFluentEmail(defaultFromEmail: emailConfig.Email)
                 .AddRazorRenderer()
                 .AddSmtpSender(new SmtpClient(emailConfig.Host, emailConfig.Port)
-                { 
+                {
                     DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
                     PickupDirectoryLocation = @"C:\Users\mgayle\email",
                     //DeliveryMethod = SmtpDeliveryMethod.Network,
@@ -46,7 +45,7 @@ namespace Net5WebTemplate.Infrastructure
 
             var identityOptionsConfig = new IdentityOptionsConfig();
             configuration.GetSection(nameof(IdentityOptionsConfig)).Bind(identityOptionsConfig);
-            
+
             services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.Password.RequiredLength = identityOptionsConfig.RequiredLength;
@@ -75,17 +74,17 @@ namespace Net5WebTemplate.Infrastructure
             };
             services.AddSingleton(tokenValidationParameters);
 
-            services.AddAuthentication( options => 
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer(options => 
+            services.AddAuthentication(options =>
+           {
+               options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+               options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+               options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+           })
+                .AddJwtBearer(options =>
                 {
                     options.SaveToken = true;
                     options.TokenValidationParameters = tokenValidationParameters;
-;
+                    ;
                 });
 
             return services;

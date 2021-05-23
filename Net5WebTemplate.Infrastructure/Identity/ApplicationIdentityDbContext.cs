@@ -7,7 +7,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
 {
     public class ApplicationIdentityDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
-        public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options, 
+        public ApplicationIdentityDbContext(DbContextOptions<ApplicationIdentityDbContext> options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }

@@ -18,7 +18,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
         {
             var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent, LockoutOnFailiure);
 
-            return (result.ToApplicationResult()); 
+            return (result.ToApplicationResult());
         }
     }
 }

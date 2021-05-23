@@ -24,7 +24,7 @@ namespace Net5WebTemplate.Persistence
         public Net5WebTemplateDbContext(
             DbContextOptions<Net5WebTemplateDbContext> options,
             ICurrentUserService currentUserService)
-            :base(options)
+            : base(options)
         {
             _currentUserService = currentUserService;
         }

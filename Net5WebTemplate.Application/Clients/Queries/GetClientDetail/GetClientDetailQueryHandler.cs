@@ -1,9 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Localization;
-using Net5WebTemplate.Application;
 using Net5WebTemplate.Application.Account.Commands.RegisterUserAccount;
-using Net5WebTemplate.Application.Common.Interfaces;
-using Net5WebTemplate.Application.Notifications.Email;
 using System.Threading;
 using System.Threading.Tasks;
 

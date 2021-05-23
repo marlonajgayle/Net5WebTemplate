@@ -36,8 +36,8 @@ namespace Net5WebTemplate.Api.Common
             ErrorMessage details = null;
 
             var jsonSerializerSettings = new JsonSerializerSettings
-            { 
-                ContractResolver = new DefaultContractResolver 
+            {
+                ContractResolver = new DefaultContractResolver
                 {
                     NamingStrategy = new CamelCaseNamingStrategy()
                 }
@@ -95,7 +95,7 @@ namespace Net5WebTemplate.Api.Common
                         Timestamp = DateTime.UtcNow
                     };
                     break;
-                case Exception _: 
+                case Exception _:
                     code = HttpStatusCode.InternalServerError;
                     details = new ErrorMessage
                     {

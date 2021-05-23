@@ -16,7 +16,7 @@ namespace Net5WebTemplate.Application.Account.Commands.RegisterUserAccount
             RuleFor(v => v.ConfirmPassword)
                 .NotEmpty().WithMessage("Confirm Password field required.");
 
-            RuleFor(v => v).Custom((v, context) => 
+            RuleFor(v => v).Custom((v, context) =>
             {
                 if (v.Password != v.ConfirmPassword)
                 {

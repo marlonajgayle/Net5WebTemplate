@@ -20,7 +20,7 @@ namespace Net5WebTemplate.Application.Account.Commands.RegisterUserAccount
             var (Result, userId) = await _userManager.CreateUserAsync(request.Email, request.Password);
 
             if (!Result.Succeeded)
-            { 
+            {
                 // throw custom exception
             }
 

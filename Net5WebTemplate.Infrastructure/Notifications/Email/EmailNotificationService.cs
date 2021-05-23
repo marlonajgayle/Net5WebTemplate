@@ -4,7 +4,6 @@ using Net5WebTemplate.Application.Notifications.Email;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -26,7 +25,7 @@ namespace Net5WebTemplate.Infrastructure.Notifications.Email
         {
             await _email
                 .To(emailAddress: message.To)
-                .Subject(subject: message.Subject)               
+                .Subject(subject: message.Subject)
                 .UsingTemplateFromEmbedded(string.Format(TemplatePath, template), ToExpando(model), GetType().Assembly)
                 .SendAsync();
         }

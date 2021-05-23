@@ -16,8 +16,8 @@ namespace Net5WebTemplate.Infrastructure.Identity
 
         public async Task<(Result Result, string UserId)> CreateUserAsync(string email, string password)
         {
-            var user = new ApplicationUser 
-            { 
+            var user = new ApplicationUser
+            {
                 Email = email,
                 UserName = email
             };
@@ -33,7 +33,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
             return await _userManager.CheckPasswordAsync(user, password);
         }
 
-        public async Task<bool> UserExistAsync(string email) 
+        public async Task<bool> UserExistAsync(string email)
         {
             var existingUser = await _userManager.FindByEmailAsync(email);
 
