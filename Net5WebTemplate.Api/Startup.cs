@@ -14,7 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Net5WebTemplate.Api.Common;
 using Net5WebTemplate.Api.ConfigOptions;
+using Net5WebTemplate.Api.Services;
 using Net5WebTemplate.Application;
+using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Application.HealthChecks;
 using Net5WebTemplate.Infrastructure;
 using Net5WebTemplate.Persistence;
@@ -57,8 +59,12 @@ namespace Net5WebTemplate.Api
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
             services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
 
+            // Register CurrentUserService
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
             // the clientId/clientIp resolvers use it.
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
 
             // Register and configure localization services
             services.AddLocalization(options => options.ResourcesPath = "Localization");

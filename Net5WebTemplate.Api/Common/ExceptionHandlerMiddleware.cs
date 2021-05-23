@@ -34,7 +34,7 @@ namespace Net5WebTemplate.Api.Common
         {
             var code = HttpStatusCode.InternalServerError;
             ErrorMessage details = null;
-            var result = string.Empty;
+
             var jsonSerializerSettings = new JsonSerializerSettings
             { 
                 ContractResolver = new DefaultContractResolver 
@@ -109,7 +109,7 @@ namespace Net5WebTemplate.Api.Common
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
-            result = JsonConvert.SerializeObject(details, jsonSerializerSettings);
+            var result = JsonConvert.SerializeObject(details, jsonSerializerSettings);
 
             return context.Response.WriteAsync(result);
         }
