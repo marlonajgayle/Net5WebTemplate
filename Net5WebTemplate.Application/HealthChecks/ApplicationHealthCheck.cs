@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,7 +10,10 @@ namespace Net5WebTemplate.Application.HealthChecks
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context,
             CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(HealthCheckResult.Healthy(description: "Build 1.0.0.0"));
+            var assembly = Assembly.Load("Net5WebTemplate.Api");
+            var versionNumber = assembly.GetName().Version;
+
+            return Task.FromResult(HealthCheckResult.Healthy(description: $"Build {versionNumber}"));
         }
     }
 }

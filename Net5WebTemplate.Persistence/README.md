@@ -16,7 +16,7 @@ Update-Package Micorsoft.EntityFrameworkCore.Tools
 ## Create Migrations
 Creates a new migration.
 ```
-Add-Migration <Description> -OutputDir Migrations
+Add-Migration <Description> -Context Net5WebTemplateDbContext -OutputDir Migrations
 ```
 
 ## Remove Migrations
@@ -27,17 +27,17 @@ Remove-Migration -Context Net5WebTemplateDbContext
 
 Revert all migrations
 ```
-Update-Database 0
+Remove-Migration 0 -Context Net5WebTemplateDbContext
 ```
 
 ## Apply Migrations
 Applies the created migrations to the database.
 ```
-Update-Database
+Update-Database -Context Net5WebTemplateDbContext
 ```
 
 ## Drop Database
 Delete database
 ```
-Drop-Database
+Drop-Database -Context Net5WebTemplateDbContext
 ```

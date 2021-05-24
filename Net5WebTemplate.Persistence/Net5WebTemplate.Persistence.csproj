@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -25,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj" />
+    <ProjectReference Include="..\Net5WebTemplate.Infrastructure\Net5WebTemplate.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

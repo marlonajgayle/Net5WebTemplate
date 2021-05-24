@@ -84,7 +84,6 @@ namespace Net5WebTemplate.Infrastructure
                 {
                     options.SaveToken = true;
                     options.TokenValidationParameters = tokenValidationParameters;
-                    ;
                 });
 
             return services;

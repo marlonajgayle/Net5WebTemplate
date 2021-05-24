@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Net5WebTemplate.Api.Routes.Version1;
@@ -10,6 +12,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
     [Produces("application/json")]
     [ApiController]
     [ApiVersion("1.0")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ClientController : ControllerBase
     {
         private readonly IMediator _mediator;

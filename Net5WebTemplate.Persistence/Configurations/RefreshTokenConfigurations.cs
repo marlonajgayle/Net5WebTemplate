@@ -8,12 +8,14 @@ namespace Net5WebTemplate.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
+            builder.HasKey(e => e.JwtId);
+
             builder.Property(e => e.JwtId)
                 .IsRequired();
 
             builder.Property(e => e.Token)
                 .IsRequired()
-                .HasMaxLength(70);
+                .HasMaxLength(128);
 
             builder.Property(e => e.Invalidated)
                 .IsRequired();

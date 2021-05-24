@@ -1,14 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Domain.Common;
 using Net5WebTemplate.Domain.Entities;
+using Net5WebTemplate.Infrastructure.Identity;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Persistence
 {
-    public class Net5WebTemplateDbContext : DbContext, INet5WebTemplateDbContext
+    public class Net5WebTemplateDbContext : IdentityDbContext<ApplicationUser>, INet5WebTemplateDbContext
     {
         private readonly ICurrentUserService _currentUserService;
 
@@ -53,6 +55,7 @@ namespace Net5WebTemplate.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(Net5WebTemplateDbContext).Assembly);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

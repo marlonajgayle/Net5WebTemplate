@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Localization;
-using Net5WebTemplate.Application.Account.Commands.RegisterUserAccount;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,7 +17,7 @@ namespace Net5WebTemplate.Application.Clients.Queries.GetClientDetail
         }
         public async Task<string> Handle(GetClientDetailQuery request, CancellationToken cancellationToken)
         {
-            await _mediator.Publish(new ConfirmAccountNotification { Email = "test@email.com" }, cancellationToken);
+            //await _mediator.Publish(new ConfirmAccountNotification { Email = "test@email.com" }, cancellationToken);
 
             return _localizer["Welcome"].Value;
         }

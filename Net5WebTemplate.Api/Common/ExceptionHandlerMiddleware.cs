@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Net5WebTemplate.Application.Common.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -12,10 +13,12 @@ namespace Net5WebTemplate.Api.Common
     public class ExceptionHandlerMiddleware
     {
         private readonly Microsoft.AspNetCore.Http.RequestDelegate _next;
+        private readonly ILogger<ExceptionHandlerMiddleware> _logger;
 
-        public ExceptionHandlerMiddleware(RequestDelegate next)
+        public ExceptionHandlerMiddleware(RequestDelegate next, ILogger<ExceptionHandlerMiddleware> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -100,10 +103,12 @@ namespace Net5WebTemplate.Api.Common
                     details = new ErrorMessage
                     {
                         Status = (int)code,
-                        Message = "An error occurred while processing your request.",
+                        Message = "An error occurred while processing your request. Please try again later.",
                         Error = exception.Message,
                         Timestamp = DateTime.UtcNow
                     };
+
+                    _logger.LogError(exception, $"Message: {exception.Message} | StackTrace: {exception.StackTrace}");
                     break;
             }
 

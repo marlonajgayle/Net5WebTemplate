@@ -7,10 +7,11 @@ namespace Net5WebTemplate.Application.Account.Commands.Login
         public LoginCommandValidator()
         {
             RuleFor(v => v.Email)
-                .NotEmpty().WithMessage("Email field is required.");
+                .NotEmpty().WithMessage("Email field is required.")
+                .EmailAddress().WithMessage("Invalid email address format.");
 
             RuleFor(v => v.Password)
-                .NotEmpty().WithMessage("Password fiedl is required.");
+                .NotEmpty().WithMessage("Password field is required.");
         }
     }
 }
