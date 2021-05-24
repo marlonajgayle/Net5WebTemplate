@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Net5WebTemplate.Api.Common;
 using Net5WebTemplate.Api.Routes.Version1;
 using Net5WebTemplate.Application.Clients.Queries.GetClientDetail;
 using System.Threading.Tasks;
@@ -27,17 +28,19 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// GET /api/clients/1
+        /// 
+        ///     GET /api/clients/1
+        ///     
         /// </remarks>
         /// <param name="clientId"></param>
         /// <returns>Client information details</returns>
         /// <response code="200">Returns client information details</response>
-        /// <response code="404">If the client is not found</response>
-        //[HttpGet(ApiRoutes.Client.Get)]
+        /// <response code="400">If request clientId is null or empty</response>
         [HttpGet]
         [Route(ApiRoutes.Client.Get)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status400BadRequest)]
+        
         public async Task<IActionResult> Get(int clientId)
         {
             var query = new GetClientDetailQuery { ClientId = clientId };

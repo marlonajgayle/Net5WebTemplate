@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Net5WebTemplate.Api.Common;
 using Net5WebTemplate.Api.ConfigOptions;
+using Net5WebTemplate.Api.Filters;
 using Net5WebTemplate.Api.Services;
 using Net5WebTemplate.Application;
 using Net5WebTemplate.Application.Common.Interfaces;
@@ -139,7 +140,7 @@ namespace Net5WebTemplate.Api
                         Scheme = "Bearer"
                     });
 
-                    swagger.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                    /*swagger.AddSecurityRequirement(new OpenApiSecurityRequirement()
                     {
                         {
                             new OpenApiSecurityScheme
@@ -156,7 +157,9 @@ namespace Net5WebTemplate.Api
                             },
                             new List<string>()
                         }
-                    });
+                    });*/
+
+                    swagger.OperationFilter<AuthorizeCheckOperationFilter>();
 
                     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -177,7 +180,11 @@ namespace Net5WebTemplate.Api
                 .AddFluentValidation(options =>
                     options.RegisterValidatorsFromAssemblyContaining<Startup>());
 
-
+            // Customise default API behaviour
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

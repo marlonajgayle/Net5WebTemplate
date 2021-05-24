@@ -1,5 +1,10 @@
 ﻿# Persistence Layer
 The persistence layer is responsible for defining and managing interactions with a database or datastore.
+
+## Performance Considerations
+Database perfromance is a large and complext topic as such please make reference to EF Core documentation to ensure the 
+best performance can be achieved and avoid common pitfalls. Please see [EF Core Performance](https://docs.microsoft.com/en-US/ef/core/performance)
+
 Entity Framework Core CLI tools manage database migrations.
 
 ## Installing tools
@@ -25,9 +30,9 @@ Removes the last added migration (rolls back the code changes that were done for
 Remove-Migration -Context Net5WebTemplateDbContext
 ```
 
-Revert all migrations
+Revert all migrations in database
 ```
-Remove-Migration 0 -Context Net5WebTemplateDbContext
+Updte-Database 0 -Context Net5WebTemplateDbContext
 ```
 
 ## Apply Migrations

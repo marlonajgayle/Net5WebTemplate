@@ -6,6 +6,7 @@ using Net5WebTemplate.Api.Contracts.Version1.Requests;
 using Net5WebTemplate.Api.Routes.Version1;
 using Net5WebTemplate.Application.Account.Commands.Login;
 using Net5WebTemplate.Application.Account.Commands.RegisterUserAccount;
+using Net5WebTemplate.Application.Common.Models;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Api.Controllers.Version1
@@ -24,17 +25,21 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         }
 
         /// <summary>
-        /// 
+        /// Creates a new user account.
         /// </summary>
         /// <remarks>
-        /// POST /api/v1/register
-        /// {
-        ///     "email:"foo@bar.com",
-        ///     "password":"password123",
-        ///     "confirmPassword:"password123"
-        /// }
+        /// Sample request:
+        /// 
+        ///     POST /api/v1/register
+        ///     {
+        ///         "email:"foo@bar.com",
+        ///         "password":"password123",
+        ///         "confirmPassword:"password123"
+        ///     }
+        ///     
         /// </remarks>
         /// <response code="201"> Successfully Created new user account</response>
+        /// <response code ="429">Too Many Requests</response>
         [HttpPost]
         [Route(ApiRoutes.Account.Create)]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -56,16 +61,20 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         ///  Login
         /// </summary>
         /// <remarks>
-        /// { 
-        ///     "email":"", 
-        ///     "password":""
-        /// }
+        /// Sample request:
+        /// 
+        ///     { 
+        ///         "email":"test@email.com", 
+        ///         "password":"Password"
+        ///     }
+        ///     
         /// </remarks>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <response code ="401">Unauthorized - not authenticated</response>
+        /// <response code ="429">Too Many Requests</response>
         [HttpPost]
         [Route(ApiRoutes.Account.Login)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TokenResult), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(LoginRequest request)
