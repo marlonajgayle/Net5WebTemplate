@@ -40,7 +40,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         [Route(ApiRoutes.Client.Get)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status400BadRequest)]
-        
+
         public async Task<IActionResult> Get(int clientId)
         {
             var query = new GetClientDetailQuery { ClientId = clientId };

@@ -2,6 +2,7 @@
 {
     public enum EmailTemplate
     {
-        EmailConfirmation
+        EmailConfirmation,
+        ForgotPassword
     }
 }
