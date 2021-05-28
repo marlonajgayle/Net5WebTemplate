@@ -23,6 +23,7 @@ namespace Net5WebTemplate.Infrastructure
             services.AddScoped<IUserManager, UserManagerService>();
             services.AddScoped<ISignInManager, SignInManagerService>();
             services.AddTransient<IJwtSecurityTokenManager, JwtSecurityTokenManager>();
+            services.AddTransient<ISecurityTokenService, SecurityTokenService>();
 
             // Register FluentEmail Services
             var emailConfig = new EmailConfiguration();

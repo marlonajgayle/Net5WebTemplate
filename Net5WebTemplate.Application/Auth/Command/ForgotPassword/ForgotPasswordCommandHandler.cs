@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Application.Auth.Command.ForgotPassword
 {
-    public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordCommand, Unit>
+    public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordCommand>
     {
         private readonly IUserManager _userManager;
         private readonly ISecurityTokenService _securityToken;

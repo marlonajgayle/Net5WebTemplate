@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Application.Auth.Command.ResetPassword
 {
-    public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand, Unit>
+    public class ResetPasswordCommandHandler : IRequestHandler<ResetPasswordCommand>
     {
         private readonly IUserManager _userManager;
 
