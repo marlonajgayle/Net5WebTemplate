@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Application.Common.Models;
 using System.Threading.Tasks;
@@ -25,6 +26,20 @@ namespace Net5WebTemplate.Infrastructure.Identity
             var result = await _userManager.CreateAsync(user, password);
 
             return (result.ToApplicationResult(), user.Id);
+        }
+
+        public async Task<Result> ResetPasswordAsync(string email, string token, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return Result.Failure(new string[] { "Invalid user token." });
+            }
+            var decodedToken = Base64UrlEncoder.Decode(token);
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, password);
+
+            return result.ToApplicationResult();
         }
 
         public async Task<bool> IsEmailandPasswordValid(string email, string password)

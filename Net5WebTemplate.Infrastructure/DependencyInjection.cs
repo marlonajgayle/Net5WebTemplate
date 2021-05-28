@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Infrastructure.Identity;
 using Net5WebTemplate.Infrastructure.Notifications.Email;
+using Net5WebTemplate.Infrastructure.SecurityTokens;
+using System;
 using System.Net.Mail;
 using System.Text;
 
@@ -55,7 +58,15 @@ namespace Net5WebTemplate.Infrastructure
                 options.Password.RequireUppercase = identityOptionsConfig.RequireUppercase;
 
             })
-                .AddEntityFrameworkStores<ApplicationIdentityDbContext>();
+                .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+                .AddDefaultTokenProviders()
+                .AddTokenProvider<PasswordResetTokenProvider<ApplicationUser>>("CustomPasswordReset");
+
+            // Configure Pasword reset Token lifespan
+            services.Configure<PasswordResetTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromMinutes(configuration.GetValue<int>("PasswordResetToken:LifespanInMinutes"));
+            });
 
             // Configure JWT Authentication and Authorization
             var jwtSettings = new JwtSettings();

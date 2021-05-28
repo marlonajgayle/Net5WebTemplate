@@ -32,7 +32,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         ///     GET /api/clients/1
         ///     
         /// </remarks>
-        /// <param name="clientId"></param>
+        /// <param name="clientId">The user that we will retrieve information for.</param>
         /// <returns>Client information details</returns>
         /// <response code="200">Returns client information details</response>
         /// <response code="400">If request clientId is null or empty</response>

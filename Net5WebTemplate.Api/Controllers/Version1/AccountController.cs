@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Net5WebTemplate.Api.Common;
 using Net5WebTemplate.Api.Contracts.Version1.Requests;
 using Net5WebTemplate.Api.Routes.Version1;
-using Net5WebTemplate.Application.Account.Commands.Login;
 using Net5WebTemplate.Application.Account.Commands.RegisterUserAccount;
-using Net5WebTemplate.Application.Common.Models;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Api.Controllers.Version1
@@ -38,7 +36,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         ///     }
         ///     
         /// </remarks>
-        /// <response code="201"> Successfully Created new user account</response>
+        /// <response code="201"> Success creating new account user</response>
         /// <response code ="429">Too Many Requests</response>
         [HttpPost]
         [Route(ApiRoutes.Account.Create)]
@@ -55,39 +53,6 @@ namespace Net5WebTemplate.Api.Controllers.Version1
             await _mediator.Send(command);
 
             return Created(ApiRoutes.Account.Create, "");
-        }
-
-        /// <summary>
-        ///  Login
-        /// </summary>
-        /// <remarks>
-        /// Sample request:
-        /// 
-        ///     { 
-        ///         "email":"test@email.com", 
-        ///         "password":"Password"
-        ///     }
-        ///     
-        /// </remarks>
-        /// <param name="request"></param>
-        /// <response code ="401">Unauthorized - not authenticated</response>
-        /// <response code ="429">Too Many Requests</response>
-        [HttpPost]
-        [Route(ApiRoutes.Account.Login)]
-        [ProducesResponseType(typeof(TokenResult), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> Login(LoginRequest request)
-        {
-            var command = new LoginCommand
-            {
-                Email = request.Email.ToLower().Trim(),
-                Password = request.Password.Trim()
-            };
-
-            var result = await _mediator.Send(command);
-
-            return Ok(result);
         }
     }
 }

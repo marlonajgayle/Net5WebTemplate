@@ -8,7 +8,14 @@
 
         public static class Auth
         {
+            public const string Login = Base + "/auth/login";
             public const string ForgotPassword = Base + "/auth/forgot-password";
+            public const string ResetPassword = Base + "/auth/reset-password";
+        }
+
+        public static class Account
+        {
+            public const string Create = Base + "/register";
         }
 
         public static class Client
@@ -18,13 +25,6 @@
             public const string GetAll = Base + "/clients";
             public const string Update = Base + "/clients/{clientId}";
             public const string Delete = Base + "/clients/{clientId}";
-        }
-
-        public static class Account
-        {
-            public const string Create = Base + "/register";
-            public const string Login = Base + "/login";
-
         }
     }
 }
