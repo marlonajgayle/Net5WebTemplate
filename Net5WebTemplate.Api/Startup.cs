@@ -73,6 +73,14 @@ namespace Net5WebTemplate.Api
             services.AddMvc()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
+            // confiure HTTP Strict Transport Security Protocol (HSTS)
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(1);
+            });
+
             // configuration (resolvers, counter key builders)
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
@@ -212,6 +220,11 @@ namespace Net5WebTemplate.Api
                     }
                 });
 
+            }
+            else
+            {
+                // Enable HTTP Strict Transport Security Protocol (HSTS)
+                app.UseHsts();
             }
 
             // List of supported cultures for localization used in RequestLocalizationOptions
