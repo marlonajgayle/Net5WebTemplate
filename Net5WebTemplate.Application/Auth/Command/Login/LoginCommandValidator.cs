@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Net5WebTemplate.Application.Account.Commands.Login
+namespace Net5WebTemplate.Application.Auth.Commands.Login
 {
     public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {

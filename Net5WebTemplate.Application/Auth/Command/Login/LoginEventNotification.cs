@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Net5WebTemplate.Application.Account.Commands.Login
+namespace Net5WebTemplate.Application.Auth.Commands.Login
 {
     public class LoginEventNotification : INotification
     {

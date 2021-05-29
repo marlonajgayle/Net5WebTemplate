@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Net5WebTemplate.Api.Common;
 using Net5WebTemplate.Api.Contracts.Version1.Requests;
 using Net5WebTemplate.Api.Routes.Version1;
-using Net5WebTemplate.Application.Account.Commands.Login;
+using Net5WebTemplate.Application.Auth.Commands.Login;
 using Net5WebTemplate.Application.Auth.Command.ForgotPassword;
 using Net5WebTemplate.Application.Auth.Command.RefreshToken;
 using Net5WebTemplate.Application.Auth.Command.ResetPassword;
