@@ -1,12 +1,14 @@
 [![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
 
 # .NET 5 Web Template
-A multi-project solution template for creating a an enterprise level using Vue.js and .NET 5 Framework guided by the Clean Architecture princicples.
+A multi-project solution project template for creating an enterprise level Web API using the ASP.NET Core 5 Framework guided by the Clean Architecture design princicples.
 
-## Use Case
-To fast track the creation of an enterprise grade .NET 5 solution with scafolding for API versioning, 
-application logging, CQRS, and Unit Testing.
+## Purpose
+This template serves two purposes, to standardize the creation of ASP.NET Core 5 Web API projects and share knowledge on ways 
+to implement projects with enterprise level considerations.
 
+The project template consist of scafolding for API Versioning, Ip Rate Limiting, Security Headers, CORS, Application Logging, CQRS, Localization,
+Swagger (Open API) and Unit Tests.
 
 ## Getting Started
 Use the instructions provided below to get the project up and running.
@@ -17,16 +19,14 @@ You will need the following tools:
 * [.NET Core SDK 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 
 ## Technologies
-* Vue.js ([RDVue](https://github.com/realdecoy/rdvue))
-* .NET Core 5.0
+* .NET 5
 * ASP.NET Core 5
 * Entity Framework Core 5
-* xUnit, NSubstitue & FluentAssertions
+* xUnit and Moq 
 
 ## Third Party Libraries
-* AutoMapper
 * Fluent Validation
-* MailKit
+* Fluent Email
 * MediatR
 * NLog
 * Swashbuckle
