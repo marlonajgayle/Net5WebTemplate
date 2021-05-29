@@ -11,36 +11,38 @@ namespace Net5WebTemplate.Application.Account.Commands.Login
     public class LoginCommandHandler : IRequestHandler<LoginCommand, TokenResult>
     {
         private readonly IMediator _mediator;
-        private readonly IUserManager _userManager;
+        private readonly ISignInManager _signInManager;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IJwtSecurityTokenManager _securityTokenManager;
 
-        public LoginCommandHandler(IMediator mediator, IUserManager userManager,
-            IJwtSecurityTokenManager securityTokenManager)
+        public LoginCommandHandler(IMediator mediator, ISignInManager signInManager,
+            IJwtSecurityTokenManager securityTokenManager, ICurrentUserService currentUserService)
         {
             _mediator = mediator;
-            _userManager = userManager;
+            _signInManager = signInManager;
+            _currentUserService = currentUserService;
             _securityTokenManager = securityTokenManager;
         }
 
         public async Task<TokenResult> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             LoginEventNotification loginEvent;
-            var isAuthenticated = await _userManager.IsEmailandPasswordValid(request.Email, request.Password);
+            var signInResult = await _signInManager.PasswordSignInAsync(request.Email, request.Password, false, true);
 
-            if (!isAuthenticated)
+            if (!signInResult.Succeeded)
             {
                 loginEvent = new LoginEventNotification
                 {
                     Username = request.Email,
-                    Description = "Username and or password was invalid.",
+                    Description = signInResult.Errors[0],
                     IsSuccess = false,
-                    IpAddress = "127.0.0.1",
+                    IpAddress = _currentUserService.IpAddress,
                     Timestamp = DateTime.UtcNow
                 };
 
                 await _mediator.Publish(loginEvent, cancellationToken);
 
-                throw new UnauthorizedException($"Invalid email or password for {request.Email}");
+                throw new UnauthorizedException(signInResult.Errors[0]);
             }
 
             loginEvent = new LoginEventNotification
@@ -48,7 +50,7 @@ namespace Net5WebTemplate.Application.Account.Commands.Login
                 Username = request.Email,
                 Description = "Login was successful",
                 IsSuccess = true,
-                IpAddress = "127.0.0.1",
+                IpAddress = _currentUserService.IpAddress,
                 Timestamp = DateTime.UtcNow
             };
 

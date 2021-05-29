@@ -85,7 +85,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
             {
                 // disable token lifetime validation as we are validating against an expired token.
                 var tokenValdationParams = _tokenValidationParameters.Clone();
-                tokenValdationParams.ValidateLifetime = false; 
+                tokenValdationParams.ValidateLifetime = false;
 
                 var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
                 if (!IsJwtWithValidSecurityAlgorithm(validatedToken))

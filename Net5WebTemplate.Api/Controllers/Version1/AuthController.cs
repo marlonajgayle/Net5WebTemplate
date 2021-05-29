@@ -81,7 +81,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         public async Task<IActionResult> RefreshToken(RefreshTokenRequest request)
         {
             var command = new RefreshTokenCommand
-            { 
+            {
                 Token = request.Token,
                 RefreshToken = request.RefreshToken.Trim()
             };

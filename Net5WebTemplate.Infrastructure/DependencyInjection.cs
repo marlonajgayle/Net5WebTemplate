@@ -57,7 +57,8 @@ namespace Net5WebTemplate.Infrastructure
                 options.Password.RequireLowercase = identityOptionsConfig.RequireLowercase;
                 options.Password.RequiredUniqueChars = identityOptionsConfig.RequiredUniqueChars;
                 options.Password.RequireUppercase = identityOptionsConfig.RequireUppercase;
-
+                options.Lockout.MaxFailedAccessAttempts = identityOptionsConfig.MaxFailedAttempts;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(identityOptionsConfig.LockoutTimeSpanInDays);
             })
                 .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
                 .AddDefaultTokenProviders()

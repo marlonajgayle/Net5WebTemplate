@@ -7,5 +7,7 @@
         public bool RequireLowercase { get; set; }
         public int RequiredUniqueChars { get; set; }
         public bool RequireUppercase { get; set; }
+        public int MaxFailedAttempts { get; set; }
+        public int LockoutTimeSpanInDays { get; set; }
     }
 }

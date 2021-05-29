@@ -18,6 +18,11 @@ namespace Net5WebTemplate.Infrastructure.Identity
         {
             var result = await _signInManager.PasswordSignInAsync(email, password, isPersistent, LockoutOnFailiure);
 
+            if (result.IsLockedOut)
+            {
+                return Result.Failure(new string[] { "Account Locked, too many invalid login attempts." });
+            }
+
             return (result.ToApplicationResult());
         }
     }

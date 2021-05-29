@@ -4,5 +4,6 @@
     {
         public string UserId { get; }
         bool IsAuthenticated { get; }
+        public string IpAddress { get; }
     }
 }
