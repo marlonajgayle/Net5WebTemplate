@@ -225,6 +225,7 @@ namespace Net5WebTemplate.Api
             {
                 // Enable HTTP Strict Transport Security Protocol (HSTS)
                 app.UseHsts();
+                app.UseExceptionHandler("/error");
             }
 
             // List of supported cultures for localization used in RequestLocalizationOptions
