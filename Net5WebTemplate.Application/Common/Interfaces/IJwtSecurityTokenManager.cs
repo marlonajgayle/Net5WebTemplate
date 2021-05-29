@@ -9,6 +9,6 @@ namespace Net5WebTemplate.Application.Common.Interfaces
     {
         Task<TokenResult> GenerateClaimsTokenAsync(string email, CancellationToken cancellationToken);
         Task<TokenResult> RefreshTokenAsync(string token, string refreshToken, CancellationToken cancellationToken);
-        ClaimsPrincipal GetPrincipFromToken(string token);
+        Task<ClaimsPrincipal> GetPrincipFromTokenAsync(string token);
     }
 }

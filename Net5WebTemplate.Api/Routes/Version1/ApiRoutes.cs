@@ -11,6 +11,7 @@
             public const string Login = Base + "/auth/login";
             public const string ForgotPassword = Base + "/auth/forgot-password";
             public const string ResetPassword = Base + "/auth/reset-password";
+            public const string RefreshToken = Base + "/auth/refresh";
         }
 
         public static class Account

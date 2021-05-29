@@ -6,6 +6,7 @@ using Net5WebTemplate.Api.Contracts.Version1.Requests;
 using Net5WebTemplate.Api.Routes.Version1;
 using Net5WebTemplate.Application.Account.Commands.Login;
 using Net5WebTemplate.Application.Auth.Command.ForgotPassword;
+using Net5WebTemplate.Application.Auth.Command.RefreshToken;
 using Net5WebTemplate.Application.Auth.Command.ResetPassword;
 using Net5WebTemplate.Application.Common.Models;
 using System.Threading.Tasks;
@@ -51,6 +52,38 @@ namespace Net5WebTemplate.Api.Controllers.Version1
             {
                 Email = request.Email.ToLower().Trim(),
                 Password = request.Password.Trim()
+            };
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Refresh JWT tokens.
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        ///     {
+        ///         "token":"eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9l",
+        ///         "resfreshToken":"IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ"
+        ///      }
+        ///      
+        /// </remarks>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route(ApiRoutes.Auth.RefreshToken)]
+        [ProducesResponseType(typeof(TokenResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> RefreshToken(RefreshTokenRequest request)
+        {
+            var command = new RefreshTokenCommand
+            { 
+                Token = request.Token,
+                RefreshToken = request.RefreshToken.Trim()
             };
 
             var result = await _mediator.Send(command);

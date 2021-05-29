@@ -77,19 +77,23 @@ namespace Net5WebTemplate.Infrastructure.Identity
             };
         }
 
-        public ClaimsPrincipal GetPrincipFromToken(string token)
+        public async Task<ClaimsPrincipal> GetPrincipFromTokenAsync(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
             try
             {
+                // disable token lifetime validation as we are validating against an expired token.
+                var tokenValdationParams = _tokenValidationParameters.Clone();
+                tokenValdationParams.ValidateLifetime = false; 
+
                 var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
                 if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
                 {
                     return null;
                 }
 
-                return principal;
+                return await Task.Run(() => principal);
             }
             catch
             {
@@ -100,7 +104,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
 
         public async Task<TokenResult> RefreshTokenAsync(string token, string refreshToken, CancellationToken cancellationToken)
         {
-            var validatedToken = GetPrincipFromToken(token);
+            var validatedToken = await GetPrincipFromTokenAsync(token);
 
             if (validatedToken == null)
             {
@@ -146,6 +150,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
 
             storedRefreshToken.Used = true;
             _dbContext.RefreshTokens.Update(storedRefreshToken);
+
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             var user = await _userManager.FindByEmailAsync(validatedToken.Claims.Single(x => x.Type == JwtRegisteredClaimNames.Jti).Value);
