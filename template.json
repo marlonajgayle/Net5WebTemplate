@@ -10,5 +10,5 @@
     "type": "project"
   },
   "sourceName": "Net5WebTemplate",
-  "preferNameDirectory": "true"
+  "preferNameDirectory": true
 }
