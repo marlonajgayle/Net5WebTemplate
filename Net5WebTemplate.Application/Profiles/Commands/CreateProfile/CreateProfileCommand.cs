@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Net5WebTemplate.Application.Profile.Commands.CreateProfile
+namespace Net5WebTemplate.Application.Profiles.Commands.CreateProfile
 {
     public class CreateProfileCommand : IRequest
     {

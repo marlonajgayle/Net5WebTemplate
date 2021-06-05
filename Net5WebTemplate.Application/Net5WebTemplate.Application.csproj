@@ -28,7 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Common\Mappings\" />
-    <Folder Include="Profile\Queries\" />
+    <Folder Include="Profiles\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

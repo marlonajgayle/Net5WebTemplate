@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Net5WebTemplate.Application.Common.Interfaces;
+using Net5WebTemplate.Domain.Entities;
 using Net5WebTemplate.Domain.ValueObjects;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Net5WebTemplate.Application.Profile.Commands.CreateProfile
+namespace Net5WebTemplate.Application.Profiles.Commands.CreateProfile
 {
     class CreateProfileCommandHandler : IRequestHandler<CreateProfileCommand>
     {
@@ -17,7 +18,7 @@ namespace Net5WebTemplate.Application.Profile.Commands.CreateProfile
 
         public async Task<Unit> Handle(CreateProfileCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Domain.Entities.Profile
+            var entity = new Profile
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
