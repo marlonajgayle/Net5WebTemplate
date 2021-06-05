@@ -8,7 +8,7 @@ namespace Net5WebTemplate.Application.Common.Interfaces
     public interface INet5WebTemplateDbContext
     {
         DbSet<Client> Clients { get; set; }
-        DbSet<Profile> Profiles { get; set; }
+        DbSet<Domain.Entities.Profile> Profiles { get; set; }
         DbSet<LoginAuditLog> LoginAuditLogs { get; set; }
         DbSet<RefreshToken> RefreshTokens { get; set; }
 

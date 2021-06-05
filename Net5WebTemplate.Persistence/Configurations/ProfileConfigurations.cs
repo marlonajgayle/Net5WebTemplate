@@ -11,6 +11,16 @@ namespace Net5WebTemplate.Persistence.Configurations
             builder.Property(e => e.Id)
                 .HasColumnName("ProfileID");
 
+            builder.Property(e => e.FirstName)
+                .HasMaxLength(100)
+                .IsRequired(true)
+                .IsUnicode(false);
+
+            builder.Property(e => e.LastName)
+               .HasMaxLength(100)
+               .IsRequired(true)
+               .IsUnicode(false);
+
             builder.Property(e => e.PhoneNumber)
                 .HasMaxLength(11)
                 .IsUnicode(false);
