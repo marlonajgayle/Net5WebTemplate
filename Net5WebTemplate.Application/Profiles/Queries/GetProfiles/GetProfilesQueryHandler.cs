@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Net5WebTemplate.Application.Common.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfiles
         public async Task<List<ProfileDto>> Handle(GetProfilesQuery request, CancellationToken cancellationToken)
         {
             List<ProfileDto> profiles = _dbContext.Profiles
+                .AsNoTracking()
                 .Select(p => new ProfileDto
                 { 
                     Id = p.Id,
