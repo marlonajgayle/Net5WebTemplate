@@ -10,7 +10,7 @@ namespace Net5WebTemplate.Domain.ValueObjects
         public string Parish { get; set; }
 
         private Address()
-        { 
+        {
         }
 
         public Address(string addressLine1, string addressLine2, string parish)

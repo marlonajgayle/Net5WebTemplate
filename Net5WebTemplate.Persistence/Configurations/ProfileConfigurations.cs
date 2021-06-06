@@ -25,7 +25,7 @@ namespace Net5WebTemplate.Persistence.Configurations
                 .HasMaxLength(11)
                 .IsUnicode(false);
 
-            builder.OwnsOne(p => p.Address, a => 
+            builder.OwnsOne(p => p.Address, a =>
             {
                 a.Property(a => a.AddressLine1)
                 .HasMaxLength(100)

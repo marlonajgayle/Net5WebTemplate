@@ -22,7 +22,7 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfiles
             List<ProfileDto> profiles = _dbContext.Profiles
                 .AsNoTracking()
                 .Select(p => new ProfileDto
-                { 
+                {
                     Id = p.Id,
                     FirstName = p.FirstName,
                     LastName = p.LastName,

@@ -26,7 +26,7 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfileById
             }
 
             return new ProfileDto
-            { 
+            {
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 AddressLine1 = entity.Address.AddressLine1,

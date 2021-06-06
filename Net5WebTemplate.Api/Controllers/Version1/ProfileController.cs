@@ -34,16 +34,16 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         [Route(ApiRoutes.Profile.Create)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Create([FromBody]ProfileRequest request)
+        public async Task<IActionResult> Create([FromBody] ProfileRequest request)
         {
             var command = new CreateProfileCommand
-            { 
-                 FirstName = request.FirstName,
-                 LastName = request.LastName,
-                 AddressLine1 = request.AddressLine1,
-                 AddressLine2 = request.AddressLine2,
-                 Parish = request.Parish,
-                 PhoneNumber = request.PhoneNumber
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                AddressLine1 = request.AddressLine1,
+                AddressLine2 = request.AddressLine2,
+                Parish = request.Parish,
+                PhoneNumber = request.PhoneNumber
             };
 
             await _mediator.Send(command);
@@ -83,7 +83,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int id)
         {
-            var query = new GetProfileByIdQuery() 
+            var query = new GetProfileByIdQuery()
             {
                 Id = id
             };
@@ -109,7 +109,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         public async Task<IActionResult> Delete(int id)
         {
             var command = new DeleteProfileCommand()
-            { 
+            {
                 Id = id
             };
 

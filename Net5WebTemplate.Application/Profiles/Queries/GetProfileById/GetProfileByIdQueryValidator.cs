@@ -8,7 +8,7 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfileById
         {
             RuleFor(v => v.Id)
                 .NotEmpty().WithMessage("Id field required.")
-                .GreaterThan(0).WithMessage("Invalid Id format.");                
+                .GreaterThan(0).WithMessage("Invalid Id format.");
         }
     }
 }
