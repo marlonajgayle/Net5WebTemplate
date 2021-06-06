@@ -18,6 +18,11 @@ You will need the following tools:
 * [Visual Studio Code or Visual Studio 2019](https://visualstudio.microsoft.com/vs/) (version 16.8 or later)
 * [.NET Core SDK 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 
+Apply migrations to create the database. Using Visual Studio Package Manager Console execute the following command:
+```
+Add-Migration Initial -Context <ProjectName>DbContext
+```
+
 ## Technologies
 * .NET 5
 * ASP.NET Core 5
