@@ -32,6 +32,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
 
         public async Task<TokenResult> GenerateClaimsTokenAsync(string email, CancellationToken cancellationToken)
         {
+            RefreshToken refreshToken;
             var user = await _userManager.FindByEmailAsync(email);
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -55,19 +56,25 @@ namespace Net5WebTemplate.Infrastructure.Identity
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var refreshToken = new RefreshToken
+            if (user.RefreshTokens.Any(t => t.IsActive))
             {
-                JwtId = token.Id,
-                UserId = user.Id,
-                Invalidated = false,
-                Used = false,
-                CreationDate = DateTime.UtcNow,
-                ExpirationDate = DateTime.UtcNow.AddMonths(3),
-                Token = GenerateRandomString(35) + Guid.NewGuid()
-            };
+                refreshToken = user.RefreshTokens.Where(t => t.IsActive == true).FirstOrDefault();
+            }
+            else
+            {
+                refreshToken = new RefreshToken
+                {
+                    JwtId = token.Id,
+                    CreationDate = DateTime.UtcNow,
+                    ExpirationDate = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenLifetime),
+                    Token = GenerateRandomString(35) + Guid.NewGuid()
+                };
 
-            _dbContext.RefreshTokens.Add(refreshToken);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+                user.RefreshTokens.Add(refreshToken);
+                await _userManager.UpdateAsync(user);
+                // Update user object
+                await _dbContext.SaveChangesAsync(cancellationToken);
+            }
 
             return new TokenResult()
             {
@@ -101,7 +108,6 @@ namespace Net5WebTemplate.Infrastructure.Identity
             }
         }
 
-
         public async Task<TokenResult> RefreshTokenAsync(string token, string refreshToken, CancellationToken cancellationToken)
         {
             var validatedToken = await GetPrincipFromTokenAsync(token);
@@ -133,12 +139,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
                 return new TokenResult { Succeeded = false, Error = "This refresh token has expired" };
             }
 
-            if (storedRefreshToken.Invalidated)
-            {
-                return new TokenResult { Succeeded = false, Error = "This refresh token has been invalidated" };
-            }
-
-            if (storedRefreshToken.Used)
+            if (!storedRefreshToken.IsActive)
             {
                 return new TokenResult { Succeeded = false, Error = "This refresh token has already been used" };
             }
@@ -148,7 +149,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
                 return new TokenResult { Succeeded = false, Error = "This refresh token does not match this JWT" };
             }
 
-            storedRefreshToken.Used = true;
+            storedRefreshToken.Revoked = DateTime.UtcNow;
             _dbContext.RefreshTokens.Update(storedRefreshToken);
 
             await _dbContext.SaveChangesAsync(cancellationToken);

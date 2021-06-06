@@ -17,15 +17,13 @@ namespace Net5WebTemplate.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(128);
 
-            builder.Property(e => e.Invalidated)
+            builder.Property(e => e.IsExpired)
                 .IsRequired();
 
-            builder.Property(e => e.Used)
-                .IsRequired();
+            builder.Property(e => e.Revoked);
 
-            builder.Property(e => e.UserId)
-                .IsRequired()
-                .HasMaxLength(64);
+            builder.Property(e => e.IsActive)
+                .IsRequired();
         }
     }
 }
