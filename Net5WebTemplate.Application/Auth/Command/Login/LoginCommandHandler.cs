@@ -31,32 +31,30 @@ namespace Net5WebTemplate.Application.Auth.Commands.Login
 
             if (!signInResult.Succeeded)
             {
-                loginEvent = new LoginEventNotification
-                {
-                    Username = request.Email,
-                    Description = signInResult.Errors[0],
-                    IsSuccess = false,
-                    IpAddress = _currentUserService.IpAddress,
-                    Timestamp = DateTime.UtcNow
-                };
-
+                loginEvent = InitLoginEvent(request.Email, signInResult.Errors[0], false);
                 await _mediator.Publish(loginEvent, cancellationToken);
 
                 throw new UnauthorizedException(signInResult.Errors[0]);
             }
 
-            loginEvent = new LoginEventNotification
+            loginEvent = InitLoginEvent(request.Email, "Login was successful", true);
+            await _mediator.Publish(loginEvent, cancellationToken);
+
+            return await _securityTokenManager.GenerateClaimsTokenAsync(request.Email, cancellationToken);
+        }
+
+        private LoginEventNotification InitLoginEvent(string email, string description, bool isSuccess)
+        {
+            var loginEvent = new LoginEventNotification
             {
-                Username = request.Email,
-                Description = "Login was successful",
-                IsSuccess = true,
+                Username = email,
+                Description = description,
+                IsSuccess = isSuccess,
                 IpAddress = _currentUserService.IpAddress,
                 Timestamp = DateTime.UtcNow
             };
 
-            await _mediator.Publish(loginEvent, cancellationToken);
-
-            return await _securityTokenManager.GenerateClaimsTokenAsync(request.Email, cancellationToken);
+            return loginEvent;
         }
     }
 }

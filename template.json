@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Marlon A. J. Gayle",
+  "classifications": [ "Web", "WebAPI" ],
+  "identity": "MarlonajGayle.Net5WebTemplate.CSharp",
+  "name": "NET5Web Template",
+  "shortName": "net5webtemplate",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Net5WebTemplate",
+  "preferNameDirectory": true
+}

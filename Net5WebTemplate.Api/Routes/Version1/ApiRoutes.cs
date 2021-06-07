@@ -27,5 +27,13 @@
             public const string Update = Base + "/clients/{clientId}";
             public const string Delete = Base + "/clients/{clientId}";
         }
+
+        public static class Profile
+        {
+            public const string Create = Base + "/profiles";
+            public const string Get = Base + "/profiles/{id}";
+            public const string GetAll = Base + "/profiles";
+            public const string Delete = Base + "/profiles/{id}";
+        }
     }
 }

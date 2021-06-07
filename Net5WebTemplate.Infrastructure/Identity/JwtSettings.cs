@@ -11,5 +11,6 @@ namespace Net5WebTemplate.Infrastructure.Identity
         public bool ValidateAudience { get; set; }
         public bool RequireExpirationTime { get; set; }
         public bool ValidateLifetime { get; set; }
+        public int RefreshTokenLifetime { get; set; }
     }
 }

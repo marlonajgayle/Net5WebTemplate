@@ -11,21 +11,23 @@ namespace Net5WebTemplate.Persistence.Configurations
             builder.HasKey(e => e.JwtId);
 
             builder.Property(e => e.JwtId)
+                .HasMaxLength(128)
                 .IsRequired();
 
             builder.Property(e => e.Token)
-                .IsRequired()
+                .HasMaxLength(128)
+                .IsRequired();
+
+            builder.Property(e => e.CreationDate)
+                .IsRequired();
+
+            builder.Property(e => e.ExpirationDate)
+                .IsRequired();
+
+            builder.Property(e => e.Revoked);
+
+            builder.Property(e => e.RemoteIpAddress)
                 .HasMaxLength(128);
-
-            builder.Property(e => e.Invalidated)
-                .IsRequired();
-
-            builder.Property(e => e.Used)
-                .IsRequired();
-
-            builder.Property(e => e.UserId)
-                .IsRequired()
-                .HasMaxLength(64);
         }
     }
 }

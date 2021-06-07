@@ -8,8 +8,9 @@ namespace Net5WebTemplate.Domain.Entities
         public string JwtId { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public bool Used { get; set; }
-        public bool Invalidated { get; set; }
-        public string UserId { get; set; }
+        public bool IsExpired => DateTime.UtcNow >= ExpirationDate;
+        public DateTime? Revoked { get; set; }
+        public bool IsActive => Revoked == null && !IsExpired;
+        public string RemoteIpAddress { get; set; }
     }
 }

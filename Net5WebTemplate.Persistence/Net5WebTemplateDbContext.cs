@@ -15,6 +15,7 @@ namespace Net5WebTemplate.Persistence
         private readonly ICurrentUserService _currentUserService;
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
         public DbSet<LoginAuditLog> LoginAuditLogs { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
