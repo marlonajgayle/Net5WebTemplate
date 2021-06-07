@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Net5WebTemplate.Api.Contracts.Version1.Requests;
@@ -7,6 +9,7 @@ using Net5WebTemplate.Application.Profiles.Commands.CreateProfile;
 using Net5WebTemplate.Application.Profiles.Commands.DeleteProfile;
 using Net5WebTemplate.Application.Profiles.Queries.GetProfileById;
 using Net5WebTemplate.Application.Profiles.Queries.GetProfiles;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Api.Controllers.Version1
@@ -14,6 +17,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ProfileController : ControllerBase
     {
         private readonly IMediator _mediator;

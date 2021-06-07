@@ -60,7 +60,7 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         }
 
         /// <summary>
-        /// Refresh JWT tokens.
+        /// Refresh expired JWT tokens.
         /// </summary>
         /// <remarks>
         /// Sample Request:
