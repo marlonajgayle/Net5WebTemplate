@@ -20,14 +20,16 @@ namespace Net5WebTemplate.Infrastructure.Identity
         private readonly TokenValidationParameters _tokenValidationParameters;
         private readonly INet5WebTemplateDbContext _dbContext;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICurrentUserService _currentUserService;
 
         public JwtSecurityTokenManager(JwtSettings jwtSettings, TokenValidationParameters tokenValidationParameters,
-            INet5WebTemplateDbContext dbContext, UserManager<ApplicationUser> userManager)
+            INet5WebTemplateDbContext dbContext, UserManager<ApplicationUser> userManager, ICurrentUserService currentUserService)
         {
             _jwtSettings = jwtSettings;
             _tokenValidationParameters = tokenValidationParameters;
             _dbContext = dbContext;
             _userManager = userManager;
+            _currentUserService = currentUserService;
         }
 
         public async Task<TokenResult> GenerateClaimsTokenAsync(string email, CancellationToken cancellationToken)
@@ -67,7 +69,8 @@ namespace Net5WebTemplate.Infrastructure.Identity
                     JwtId = token.Id,
                     CreationDate = DateTime.UtcNow,
                     ExpirationDate = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenLifetime),
-                    Token = GenerateRandomString(35) + Guid.NewGuid()
+                    Token = GenerateRandomString(35) + Guid.NewGuid(),
+                    RemoteIpAddress = _currentUserService.IpAddress
                 };
 
                 user.RefreshTokens.Add(refreshToken);

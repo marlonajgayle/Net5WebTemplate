@@ -11,5 +11,6 @@ namespace Net5WebTemplate.Domain.Entities
         public bool IsExpired => DateTime.UtcNow >= ExpirationDate;
         public DateTime? Revoked { get; set; }
         public bool IsActive => Revoked == null && !IsExpired;
+        public string RemoteIpAddress { get; set; }
     }
 }
