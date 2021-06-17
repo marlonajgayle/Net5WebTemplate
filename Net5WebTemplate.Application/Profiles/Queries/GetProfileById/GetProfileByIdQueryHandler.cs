@@ -25,7 +25,7 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfileById
                 throw new NotFoundException(nameof(Profiles), request.Id);
             }
 
-            return new ProfileDto
+            return new GetProfiles.ProfileDto
             {
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,

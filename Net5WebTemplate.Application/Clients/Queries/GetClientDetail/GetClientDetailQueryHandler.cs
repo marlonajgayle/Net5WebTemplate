@@ -1,4 +1,4 @@
-﻿//using MediatR;
+﻿using MediatR;
 using Microsoft.Extensions.Localization;
 using System.Threading;
 using System.Threading.Tasks;

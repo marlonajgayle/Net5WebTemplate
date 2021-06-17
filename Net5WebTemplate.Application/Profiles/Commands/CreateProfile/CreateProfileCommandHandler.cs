@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Application.Profiles.Commands.CreateProfile
 {
-    class CreateProfileCommandHandler : IRequestHandler<CreateProfileCommand>
+    public class CreateProfileCommandHandler : IRequestHandler<CreateProfileCommand>
     {
         private readonly INet5WebTemplateDbContext _dbContext;
 

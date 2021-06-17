@@ -1,27 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Moq;
-using System.Threading.Tasks;
+﻿using Moq;
 using Net5WebTemplate.Application.Common.Interfaces;
-using Net5WebTemplate.Api.Controllers.Version1
+using Net5WebTemplate.Api.Controllers.Version1;
+using Xunit;
+using Net5WebTemplate.Api.Contracts.Version1.Requests;
+using Net5WebTemplate.Application.Account.Commands.RegisterUserAccount;
+using MediatR;
+using System.Threading;
+using Net5WebTemplate.Infrastructure.Identity;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace Net5WebTemplate.UnitTests.Application.Account.Command
 {
-    class CreateUserAccountTest
-    {
-        private readonly IUserManager _userManager;        
-        [TestMethod]
-        public void CreateUserAccount()
+    public  class CreateUserAccountTest
+    {       
+        public Mock<IUserManager> userManagerMock = new Mock<IUserManager>();
+        
+        [Fact]
+        public void ShouldCreateUser()
         {
-            var email = "test@email.com";
-            var password = "Password";
-            var mock = new Mock<IUserManager>();
-            mock.Setup(p => p.CreateUserAsrync(email,password)).Returns("confirm");
-            AccountController account = new AccountController(mock.Object);
-            string result = account.Create(RegisterRequest request);
-            Assert.AreEqual("confirm", result);
+            // Arrange
+            var mediatorMock = new Mock<IMediator>();
+            IdentityResult result = IdentityResult.Success;
+            var userId = "1";
+            userManagerMock.Setup(x => x.CreateUserAsync(It.IsAny<string>(), It.IsAny<string>()))
+                .ReturnsAsync((result.ToApplicationResult(), userId));
+
+            var sut = new CreateUserAccountCommandHandler(userManagerMock.Object, mediatorMock.Object);            
+
+            // Act
+            var handleResult = sut.Handle(new CreateUserAccountCommand {
+                Email ="" , Password ="", ConfirmPassword=""},
+                CancellationToken.None);
+
+            Assert.True(handleResult.IsCompletedSuccessfully);
         }
     }
 }

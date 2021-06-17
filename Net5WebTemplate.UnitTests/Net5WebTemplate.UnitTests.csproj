@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.extensibility.execution" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -21,7 +23,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\" />
+    <ProjectReference Include="..\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj" />
+    <ProjectReference Include="..\Net5WebTemplate.Infrastructure\Net5WebTemplate.Infrastructure.csproj" />
+    <ProjectReference Include="..\Net5WebTemplate.Api\Net5WebTemplate.Api.csproj" />
+    <ProjectReference Include="..\Net5WebTemplate.Domain\Net5WebTemplate.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Auth\Command\" />
+    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>
