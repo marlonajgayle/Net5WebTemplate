@@ -3,6 +3,7 @@ using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Application.Profiles.Queries.GetProfileById;
 using Net5WebTemplate.Application.Profiles.Queries.GetProfiles;
 using Net5WebTemplate.Domain.ValueObjects;
+using Newtonsoft.Json;
 using System.Threading;
 using Xunit;
 
@@ -18,20 +19,21 @@ namespace Net5WebTemplate.UnitTests.Application.Profile.Query
             var Id = It.IsAny<int>();
             var entityDto = new ProfileDto
             {
-                FirstName = It.IsAny<string>(),
-                LastName = It.IsAny<string>(),              
-                AddressLine1 = It.IsAny<string>(),
-                AddressLine2 = It.IsAny<string>(),
-                Parish = It.IsAny<string>(),
-                PhoneNumber = It.IsAny<string>()
+            
+                FirstName = "Bob",
+                LastName = "Marley",
+                AddressLine1 = "lot 102",
+                AddressLine2 = "Shanty town",
+                Parish = "Kingston",
+                PhoneNumber = "876 435-5432"                
             };
 
             var entity = new Domain.Entities.Profile
             {
-                FirstName = It.IsAny<string>(),
-                LastName = It.IsAny<string>(),
-                Address = new Address(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()),
-                PhoneNumber = It.IsAny<string>()
+                FirstName = "Bob",
+                LastName = "Marley",
+                Address = new Address("lot 102", "Shanty town", "Kingston"),
+                PhoneNumber = "876 435-5432"
             };
 
             dbContextMock.Setup(x => x.Profiles.FindAsync(Id)).ReturnsAsync(entity);            
@@ -42,7 +44,9 @@ namespace Net5WebTemplate.UnitTests.Application.Profile.Query
             {
                 Id = 0
             }, CancellationToken.None);
-            Assert.IsType<ProfileDto>(handleResult);   
+            var obj1Str = JsonConvert.SerializeObject(entityDto);
+            var obj2Str = JsonConvert.SerializeObject(handleResult.Result);
+            Assert.Equal(obj1Str, obj2Str);
         }
     }
 }
