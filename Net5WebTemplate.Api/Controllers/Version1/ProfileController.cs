@@ -9,7 +9,6 @@ using Net5WebTemplate.Application.Profiles.Commands.CreateProfile;
 using Net5WebTemplate.Application.Profiles.Commands.DeleteProfile;
 using Net5WebTemplate.Application.Profiles.Queries.GetProfileById;
 using Net5WebTemplate.Application.Profiles.Queries.GetProfiles;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Api.Controllers.Version1
@@ -65,9 +64,13 @@ namespace Net5WebTemplate.Api.Controllers.Version1
         [Route(ApiRoutes.Profile.GetAll)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] PaginationQuery pagination)
         {
-            var result = await _mediator.Send(new GetProfilesQuery());
+            var result = await _mediator.Send(new GetProfilesQuery
+            {
+                Offset = pagination.Offset,
+                Limit = pagination.Limit
+            });
 
             return Ok(result);
         }

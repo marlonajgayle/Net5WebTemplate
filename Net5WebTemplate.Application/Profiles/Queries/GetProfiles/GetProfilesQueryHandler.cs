@@ -1,14 +1,15 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Net5WebTemplate.Application.Common.Interfaces;
-using System.Collections.Generic;
+using Net5WebTemplate.Application.Common.Mappings;
+using Net5WebTemplate.Application.Common.Models;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Net5WebTemplate.Application.Profiles.Queries.GetProfiles
 {
-    public class GetProfilesQueryHandler : IRequestHandler<GetProfilesQuery, List<ProfileDto>>
+    public class GetProfilesQueryHandler : IRequestHandler<GetProfilesQuery, PaginatedList<ProfileDto>>
     {
         private readonly INet5WebTemplateDbContext _dbContext;
 
@@ -17,9 +18,9 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfiles
             _dbContext = dbContext;
         }
 
-        public async Task<List<ProfileDto>> Handle(GetProfilesQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedList<ProfileDto>> Handle(GetProfilesQuery request, CancellationToken cancellationToken)
         {
-            List<ProfileDto> profiles = _dbContext.Profiles
+            var profiles = await _dbContext.Profiles
                 .AsNoTracking()
                 .Select(p => new ProfileDto
                 {
@@ -30,9 +31,9 @@ namespace Net5WebTemplate.Application.Profiles.Queries.GetProfiles
                     AddressLine2 = p.Address.AddressLine2,
                     Parish = p.Address.Parish,
                     PhoneNumber = p.PhoneNumber
-                }).ToList();
+                }).PaginatedListAsync(request.Offset, request.Limit);
 
-            return await Task.FromResult(profiles);
+            return profiles;
         }
     }
 }

@@ -27,10 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Mappings\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Net5WebTemplate.Domain\Net5WebTemplate.Domain.csproj" />
   </ItemGroup>
 
