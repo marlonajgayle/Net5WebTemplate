@@ -2,7 +2,6 @@
 using Net5WebTemplate.Application.Common.Interfaces;
 using Net5WebTemplate.Application.Profiles.Commands.CreateProfile;
 using Net5WebTemplate.Domain.ValueObjects;
-using Net5WebTemplate.Domain.Entities;
 using System.Threading;
 using Xunit;
 

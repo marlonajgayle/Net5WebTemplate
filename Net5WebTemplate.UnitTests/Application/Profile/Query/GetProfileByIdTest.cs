@@ -19,13 +19,13 @@ namespace Net5WebTemplate.UnitTests.Application.Profile.Query
             var Id = It.IsAny<int>();
             var entityDto = new ProfileDto
             {
-            
+
                 FirstName = "Bob",
                 LastName = "Marley",
                 AddressLine1 = "lot 102",
                 AddressLine2 = "Shanty town",
                 Parish = "Kingston",
-                PhoneNumber = "876 435-5432"                
+                PhoneNumber = "876 435-5432"
             };
 
             var entity = new Domain.Entities.Profile
@@ -36,7 +36,7 @@ namespace Net5WebTemplate.UnitTests.Application.Profile.Query
                 PhoneNumber = "876 435-5432"
             };
 
-            dbContextMock.Setup(x => x.Profiles.FindAsync(Id)).ReturnsAsync(entity);            
+            dbContextMock.Setup(x => x.Profiles.FindAsync(Id)).ReturnsAsync(entity);
 
             var sut = new GetProfileByIdQueryHandler(dbContextMock.Object);
             // Act

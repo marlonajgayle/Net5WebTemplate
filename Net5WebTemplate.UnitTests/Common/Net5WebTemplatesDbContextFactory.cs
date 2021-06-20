@@ -3,10 +3,6 @@ using Net5WebTemplate.Domain.Entities;
 using Net5WebTemplate.Domain.ValueObjects;
 using Net5WebTemplate.Persistence;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Net5WebTemplate.UnitTests.Common
 {
@@ -25,7 +21,7 @@ namespace Net5WebTemplate.UnitTests.Common
             _context.Profiles.AddRange(new[]
             {
                new Profile
-               {           
+               {
                     FirstName = "Bob",
                     LastName = "Marley",
                     Address= new Address("102","Shanty Town","Kingston"),

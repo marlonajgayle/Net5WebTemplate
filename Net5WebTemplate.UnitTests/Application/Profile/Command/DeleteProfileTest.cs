@@ -1,11 +1,9 @@
 ﻿using Moq;
 using Net5WebTemplate.Application.Common.Interfaces;
-using Net5WebTemplate.Application.Profiles.Commands.CreateProfile;
+using Net5WebTemplate.Application.Profiles.Commands.DeleteProfile;
 using Net5WebTemplate.Domain.ValueObjects;
-using Net5WebTemplate.Domain.Entities;
 using System.Threading;
 using Xunit;
-using Net5WebTemplate.Application.Profiles.Commands.DeleteProfile;
 
 namespace Net5WebTemplate.UnitTests.Application.Profile.Command
 {
