@@ -53,7 +53,6 @@ namespace Net5WebTemplate.Application.Auth.Commands.Login
                 IpAddress = _currentUserService.IpAddress,
                 Timestamp = DateTime.UtcNow
             };
-
             return loginEvent;
         }
     }
