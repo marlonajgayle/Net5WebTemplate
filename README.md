@@ -1,4 +1,5 @@
 [![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
+[![Build](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml)
 
 # .NET 5 Web Template
 A multi-project solution .NET template for creating a an enterprise level application that includes the use of Swagger, API Versioning, 
