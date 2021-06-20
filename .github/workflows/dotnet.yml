@@ -16,18 +16,18 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os:[ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         
     steps:
-    - name: Chackout
+    - name: 'Checkout Source Code'
       uses: actions/checkout@v2
-    - name: 'Setup .NET Core 5.0.x SDK'
+    - name: 'Install .NET Core 5.0.x SDK'
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Restore .NET dependencies
+    - name: 'Restore .NET Dependencies'
       run: dotnet restore
-    - name: dotnet Build
+    - name: 'Execute Dotnet Build'
       run: dotnet build --no-restore
-    - name: dotnet Test
+    - name: 'Execute Dotnet Test'
       run: dotnet test --no-build --verbosity normal
