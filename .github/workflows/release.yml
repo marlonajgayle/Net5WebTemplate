@@ -56,7 +56,7 @@ jobs:
         name: 'package'
 
     - name: 'Dotnet Nuget Add Source'
-      run: dotnet nuget add source https://github.com/marlonajgayle/index.json --name GitHub --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
+      run: dotnet nuget add source https://nuget.pkg.github.com/marlonajgayle/index.json --name GitHub --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
 
     - name: 'Dotnet Nuget Push'
       run: dotnet nuget push .\*.nuget --api-key ${{ github.token }} --source GitHub --skip-duplicate
