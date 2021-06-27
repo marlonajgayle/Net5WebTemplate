@@ -38,7 +38,7 @@ jobs:
        uses: actions/upload-artifact@v2.2.4
        with:
          name: package
-         path: ${{ env.PACKAGE_OUTPUT }}
+         path: ${{ env.PACKAGE_OUTPUT }}\*.nupkg
 
   push-github-packages:
     name: 'Push GitHub Packages'
@@ -60,4 +60,4 @@ jobs:
       run: dotnet nuget add source https://nuget.pkg.github.com/marlonajgayle/index.json --name GitHub --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
 
     - name: 'Dotnet Nuget Push'
-      run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+      run: dotnet nuget push .**\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
