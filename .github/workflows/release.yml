@@ -7,6 +7,7 @@ on:
 env:
   # Disable sending .NET CLI telemetry to Microsoft.
   DOTNET_CLI_TELEMETRY_OPTOUT: true'
+  PACKAGE_OUTPUT: '{{ github.workspace }}/output'
 
 jobs:
   build:
@@ -31,13 +32,13 @@ jobs:
        run: dotnet test --no-build --configuration Release --verbosity normal
 
      - name: 'Pack Project'
-       run: dotnet pack Net5WebTemplate.sln --no-build --no-restore --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }} -p:PackageReleaseNotes="See https://github.com/marlonajgayle/Net5WebTemplate/releases/tag/${{ github.event.release.tag_name }}" 
+       run: dotnet pack Net5WebTemplate.sln --no-build --no-restore --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }} -p:PackageReleaseNotes="See https://github.com/marlonajgayle/Net5WebTemplate/releases/tag/${{ github.event.release.tag_name }}" --output ${{ env.PACKAGE_OUTPUT }}
 
      - name: 'Archive Nuget Artifact'
        uses: actions/upload-artifact@v2.2.4
        with:
          name: package
-         path: '**/*.nupkg'
+         path: ${{ env.PACKAGE_OUTPUT }}
 
   push-github-packages:
     name: 'Push GitHub Packages'
