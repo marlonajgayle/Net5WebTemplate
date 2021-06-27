@@ -37,7 +37,7 @@ jobs:
        uses: actions/upload-artifact@v2.2.4
        with:
          name: package
-         path: '**/*.nupkg'
+         path: '**/*.nuget'
 
   push-github-packages:
     name: 'Push GitHub Packages'
