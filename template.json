@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Marlon A. J. Gayle",
-  "classifications": [ "Web", "Cloud" ],
+  "classifications": [ "Web", "Cloud", "Solution" ],
   "identity": "marlonajgayle.net5.web.template",
   "name": "NET 5 Web Template",
   "shortName": "net5web",
