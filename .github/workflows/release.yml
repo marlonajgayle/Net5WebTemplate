@@ -38,3 +38,25 @@ jobs:
        with:
          name: package
          path: '**/*.nupkg'
+
+  push-github-packages:
+    name: 'Push GitHub Packages'
+    needs: [build]
+    if: github.event_name == 'release'
+    environment:
+      name: 'GitHub Packages'
+      url: https://github.com/org/marlonajgayle/packages
+    permissions:
+      packages: write
+    runs-on: windows-latest
+    steps:
+    - name: 'Download Artifact'
+      uses: actions/download-artifacts@v2
+      with:
+        name: 'package'
+
+    - name: 'Dotnet Nuget Add Source'
+      run: dotnet nuget add source https://github.com/marlonajgayle/index.json --name GitHub --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
+
+    - name: 'Dotnet Nuget Push'
+      run: dotnet nuget push .\*.nuget --api-key ${{ github.token }} -- source GitHub --skip-duplicate
