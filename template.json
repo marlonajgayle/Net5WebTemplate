@@ -7,8 +7,17 @@
   "shortName": "net5web",
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution"
   },
   "sourceName": "Net5WebTemplate",
-  "preferNameDirectory": true
+  "preferNameDirectory": true,
+  "guids": [
+    "F303836B-8C51-4348-981F-52739C14ACA7",
+    "0A8B8D55-EBF4-4A70-AF15-C558EB4BE30F",
+    "0CE096EB-C33E-4E0C-A2E4-10363312EAB8",
+    "BE75F783-4E56-4A20-8640-DD4D27FD628B",
+    "15FB100C-D3F0-4B51-8556-93B68C6421C7",
+    "5D344AEE-D606-4477-B2CF-240592A2043E",
+    "5DB77ACE-F549-42E3-ADBD-D36593E02834"
+  ]
 }
