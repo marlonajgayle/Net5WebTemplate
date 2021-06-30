@@ -46,7 +46,7 @@ jobs:
     if: github.event_name == 'release'
     environment:
       name: 'GitHub Packages'
-      url: https://github.com/marlonajgayle/packages
+      url: https://github.com/marlonajgayle/Net5WebTemplate
     permissions:
       packages: write
     runs-on: windows-latest
@@ -57,7 +57,7 @@ jobs:
         name: 'packages'
 
     - name: 'Dotnet Nuget Add Source'
-      run: dotnet nuget add source https://nuget.pkg.github.com/marlonajgayle/index.json --name GitHub --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
+      run: dotnet nuget add source https://nuget.pkg.github.com/marlonajgayle/index.json --name github --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
 
     - name: 'Dotnet Nuget Push'
-      run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+      run: dotnet nuget push .\*.nupkg --api-key ${{ secrets.WORKFLOW_AUTH_TOKEN }} --source GitHub --skip-duplicate
