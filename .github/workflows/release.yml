@@ -34,10 +34,10 @@ jobs:
        run: dotnet pack Net5WebTemplate.sln --no-build --no-restore --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }} -p:PackageReleaseNotes="See https://github.com/marlonajgayle/Net5WebTemplate/releases/tag/${{ github.event.release.tag_name }}"
 
      - name: 'Archive Nuget Artifact'
-       uses: actions/upload-artifact@v2
+       uses: actions/upload-artifact@v2.2.4
        with:
          name: packages
-         path: '**\*.nupkg'
+         path: './Artifacts'
 
   push-github-packages:
     name: 'Push GitHub Packages'
@@ -45,7 +45,7 @@ jobs:
     if: github.event_name == 'release'
     environment:
       name: 'GitHub Packages'
-      url: https://github.com/org/marlonajgayle/packages
+      url: https://github.com/marlonajgayle/packages
     permissions:
       packages: write
     runs-on: windows-latest
