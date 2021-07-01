@@ -61,4 +61,4 @@ jobs:
       run: dotnet nuget add source https://nuget.pkg.github.com/marlonajgayle/index.json --name github --username marlonajgayle --password ${{ secrets.WORKFLOW_AUTH_TOKEN }}
 
     - name: 'Dotnet Nuget Push'
-      run: dotnet nuget push .\*.Api*.nupkg --api-key ${{ secrets.WORKFLOW_AUTH_TOKEN }} --source github --skip-duplicate
+      run: dotnet nuget push .\*.nupkg --api-key ${{ secrets.WORKFLOW_AUTH_TOKEN }} --source github --skip-duplicate
