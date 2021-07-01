@@ -32,8 +32,7 @@ jobs:
        run: dotnet test --no-build --configuration Release --verbosity normal
 
      - name: 'Pack Project'
-       run: dotnet pack --no-build --no-restore --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }} -p:PackageReleaseNotes="See https://github.com/marlonajgayle/Net5WebTemplate/releases/tag/${{ github.event.release.tag_name }}" --output ${{ env.ARTIFACTS_DIRECTORY }}
-       working-directory: .\Net5WebTemplate\Net5WebTemplate
+       run: dotnet pack \Net5WebTemplate.Api\Net5WebTemplate.Api.csproj --no-build --no-restore --configuration Release -p:PackageVersion=${{ github.event.release.tag_name }} -p:PackageReleaseNotes="See https://github.com/marlonajgayle/Net5WebTemplate/releases/tag/${{ github.event.release.tag_name }}" --output ${{ env.ARTIFACTS_DIRECTORY }}
 
      - name: 'Archive Nuget Artifact'
        uses: actions/upload-artifact@v2.2.4
