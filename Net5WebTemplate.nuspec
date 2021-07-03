@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
-    <id>Net5WebTemplate $version$</id>
+    <id>Net5WebTemplate</id>
     <version>$version$</version>
     <description>
       A multi-project solution .NET template for creating an enterprise-level application that includes the use of 
