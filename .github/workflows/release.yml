@@ -1,4 +1,4 @@
-name: Release to Nuget
+name: Release Nuget Packages
 
 on:
   release:
@@ -62,3 +62,20 @@ jobs:
 
     - name: 'Dotnet Nuget Push'
       run: dotnet nuget push .\*.nupkg --api-key ${{ secrets.WORKFLOW_AUTH_TOKEN }} --source github --skip-duplicate
+
+  push-nuget-packages:
+    name: 'Push Nuget Packages'
+    needs: [build]
+    if: github.event_name == 'release'
+    environment:
+      name: 'Nuget Packages'
+      url: https://www.nuget.org/packages/Net5WebTemplate/
+    runs-on: windows-latest
+    steps:
+    - name: 'Download Artifact'
+      uses: actions/download-artifact@v2
+      with:
+        name: 'packages'
+
+    - name: 'Push Nuget Packages'
+      run: dotnet nuget push .\*.nupkg --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --source https://api.nuget.org/v3/index.json --skip-duplicate
