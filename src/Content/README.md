@@ -1,7 +1,3 @@
-[![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
-[![Build](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml)
-[![CodeQL](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml)
-
 # .NET 5 Web Template
 A multi-project solution .NET template for creating a an enterprise level application that includes the use of Swagger, API Versioning, 
 Localization, NLog, Fluent Validation, Fluent Email, IP Rate Limiting using the .NET 5 Framework and are guided by the Clean Architecture 
@@ -44,16 +40,6 @@ You will need the following tools:
 * NLog
 * NWebsec
 * Swashbuckle
-
-## Contributions
-- [Demar-j](https://github.com/Demar-j) - Implemented unit tests.
-
-## Credits
-This solution's structure was heavily infuenced by [Jason Taylor's](https://github.com/jasontaylordev) Clean Architecture model.
-API Icon made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/)
-
-## Versions
-The [master](https://github.com/marlonajgayle/Net5WebTemplate/master) branch is running .NET 5.0
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/marlonajgayle/Net5WebTemplate/master/LICENSE.md) file for details.
