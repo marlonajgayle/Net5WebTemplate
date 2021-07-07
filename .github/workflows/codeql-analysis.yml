@@ -54,8 +54,14 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
+    - name: 'Install .NET Core 5 SDK'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: 'Restore .NET Dependences'
+      run: dotnet restore
+    - name: 'Execute dotnet build'
+      run: dotnet build --no-restore --configuration Release
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
