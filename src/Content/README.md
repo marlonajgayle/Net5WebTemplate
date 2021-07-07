@@ -23,11 +23,12 @@ You will need the following tools:
 * [.NET Core SDK 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 
 ### Instructions
-1. Run `dotnet new --install Clean.Architecture.Solution.Template` to install the project template
-2. Create a folder for your solution and cd into it.
-3. Run `dotnet new net5webtemplate --name "MyProject"` to create a new project
-4. Run `dotnet ef migrations add Initial --context <ProjectName>DbContext` to add migation with EF Core 
-5. Run `dotnet ef database update Initial` to create application database.
+1. Install the latest [.NET Core 5 SDK](https://dotnet.microsoft.com/download). 
+2. Run `dotnet new --install Net5WebTemplate` to install the project template
+3. Then create a folder for your solution and cd into it.
+4. Run `dotnet new net5webtemplate --name "MyProject"` to create a new project
+5. Run `dotnet ef migrations add Initial --context <ProjectName>DbContext` to add migation with EF Core 
+6. Run `dotnet ef database update Initial` to create application database.
 
 ## Technologies and Third Party Libraries
 * .NET 5
@@ -49,6 +50,7 @@ You will need the following tools:
 
 ## Credits
 This solution's structure was heavily infuenced by [Jason Taylor's](https://github.com/jasontaylordev) Clean Architecture model.
+API Icon made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/)
 
 ## Versions
 The [master](https://github.com/marlonajgayle/Net5WebTemplate/master) branch is running .NET 5.0

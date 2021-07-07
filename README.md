@@ -50,6 +50,7 @@ You will need the following tools:
 
 ## Credits
 This solution's structure was heavily infuenced by [Jason Taylor's](https://github.com/jasontaylordev) Clean Architecture model.
+API Icon made by [Freepik](https://www.freepik.com) from [www.flaticon.com](https://www.flaticon.com/)
 
 ## Versions
 The [master](https://github.com/marlonajgayle/Net5WebTemplate/master) branch is running .NET 5.0

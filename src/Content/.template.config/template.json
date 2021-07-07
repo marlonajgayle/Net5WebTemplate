@@ -1,15 +1,17 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": "Marlon A. J. Gayle",
-  "classifications": [ "Web", "Cloud", "Solution" ],
+  "classifications": [ ".NET 5 Web Template", "Cloud", "Web"  ],
   "identity": "marlonajgayle.net5.web.template",
   "name": "NET 5 Web Template",
   "shortName": "net5web",
+  "defaultName": "Application",
   "tags": {
     "language": "C#",
     "type": "solution"
   },
   "sourceName": "Net5WebTemplate",
+  "description": "A project template for creating ASP.NET Core 5 Web API milti-project solution for Windows, Linux and macOS using Clean Architecture and CQRS. ",
   "preferNameDirectory": true,
   "guids": [
     "F303836B-8C51-4348-981F-52739C14ACA7",
@@ -19,5 +21,65 @@
     "15FB100C-D3F0-4B51-8556-93B68C6421C7",
     "5D344AEE-D606-4477-B2CF-240592A2043E",
     "5DB77ACE-F549-42E3-ADBD-D36593E02834"
-  ]
+  ],
+  "primaryOutputs": [
+    { "path": "Net5WebTemplate.sln" }
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!ReadMe)",
+          "exclude": [
+            "README.md"
+          ]
+        },
+        {
+          "condition": "(!License)",
+          "exclude": [
+            "LICENSE.md"
+          ]
+        },
+        {
+          "condition": "(!GitIgnore)",
+          "exclude": [
+            ".gitignore",
+            ".gitattributes"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    "Title": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Title",
+      "description": "The name of the project which determines the assembly product name."
+    },
+    "Description": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Description",
+      "description": "A description of the project which determines the assembly description."
+    },
+    "ReadMe": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include a Read Me file (ReadMe.md) in the solution."
+    },
+    "License": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include an MIT License file (License.md) in the solution."
+    },
+    "GitIgnore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include a Git Ignore files (.gitignore & .gitattributes) in the solution."
+    }
+  }
 }
