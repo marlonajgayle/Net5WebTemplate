@@ -174,13 +174,13 @@ namespace Net5WebTemplate.Api
                     swagger.IncludeXmlComments(xmlPath);
                 });
 
-            // Register InvestEdge.Application Service Configurations
+            // Register Net5WebTemplate.Application Service Configurations
             services.AddApplication();
 
-            // Add InvestEdge.Infrastructure Service Configuration
+            // Add Net5WebTemplate.Infrastructure Service Configuration
             services.AddPersistence(Configuration);
 
-            // Add InvestEdge.Infrastructure Service Configuration
+            // Add Net5WebTemplate.Infrastructure Service Configuration
             services.AddInfrastructure(Configuration, Environment);
 
             services.AddControllers()
