@@ -24,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj" />
-    <ProjectReference Include="..\Net5WebTemplate.Infrastructure\Net5WebTemplate.Infrastructure.csproj" />
-    <ProjectReference Include="..\Net5WebTemplate.Api\Net5WebTemplate.Api.csproj" />
-    <ProjectReference Include="..\Net5WebTemplate.Domain\Net5WebTemplate.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj" />
+    <ProjectReference Include="..\..\src\Net5WebTemplate.Infrastructure\Net5WebTemplate.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Net5WebTemplate.Api\Net5WebTemplate.Api.csproj" />
+    <ProjectReference Include="..\..\src\Net5WebTemplate.Domain\Net5WebTemplate.Domain.csproj" />
   </ItemGroup>
 
 </Project>
