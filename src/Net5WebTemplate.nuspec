@@ -15,6 +15,7 @@
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
+    <tags>c-sharp dotnet core template API</tags>
   </metadata>
   <files>
     <file src="Content\**\*.*" exclude="Content\**\bin\**\*.*;Content\**\obj\**\*.*;" target="Content" />
