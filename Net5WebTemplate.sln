@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Api", "src\Content\Net5WebTemplate.Api\Net5WebTemplate.Api.csproj", "{F303836B-8C51-4348-981F-52739C14ACA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Api", "src\Content\src\Net5WebTemplate.Api\Net5WebTemplate.Api.csproj", "{F303836B-8C51-4348-981F-52739C14ACA7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Domain", "src\Content\Net5WebTemplate.Domain\Net5WebTemplate.Domain.csproj", "{0A8B8D55-EBF4-4A70-AF15-C558EB4BE30F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Domain", "src\Content\src\Net5WebTemplate.Domain\Net5WebTemplate.Domain.csproj", "{0A8B8D55-EBF4-4A70-AF15-C558EB4BE30F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Application", "src\Content\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj", "{0CE096EB-C33E-4E0C-A2E4-10363312EAB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Application", "src\Content\src\Net5WebTemplate.Application\Net5WebTemplate.Application.csproj", "{0CE096EB-C33E-4E0C-A2E4-10363312EAB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Infrastructure", "src\Content\Net5WebTemplate.Infrastructure\Net5WebTemplate.Infrastructure.csproj", "{BE75F783-4E56-4A20-8640-DD4D27FD628B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Infrastructure", "src\Content\src\Net5WebTemplate.Infrastructure\Net5WebTemplate.Infrastructure.csproj", "{BE75F783-4E56-4A20-8640-DD4D27FD628B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Persistence", "src\Content\Net5WebTemplate.Persistence\Net5WebTemplate.Persistence.csproj", "{15FB100C-D3F0-4B51-8556-93B68C6421C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.Persistence", "src\Content\src\Net5WebTemplate.Persistence\Net5WebTemplate.Persistence.csproj", "{15FB100C-D3F0-4B51-8556-93B68C6421C7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.UnitTests", "src\Content\Net5WebTemplate.UnitTests\Net5WebTemplate.UnitTests.csproj", "{5D344AEE-D606-4477-B2CF-240592A2043E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Net5WebTemplate.UnitTests", "src\Content\tests\Net5WebTemplate.UnitTests\Net5WebTemplate.UnitTests.csproj", "{5D344AEE-D606-4477-B2CF-240592A2043E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5DB77ACE-F549-42E3-ADBD-D36593E02834}"
 	ProjectSection(SolutionItems) = preProject
