@@ -1,6 +1,8 @@
 [![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
 [![Build](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml)
 [![CodeQL](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml)
+[![Net5WebTemplate Nuget Package](https://img.shields.io/nuget/v/Net5WebTemplate.svg)](https://www.nuget.org/packages/Net5WebTemplate/)
+[![NuGet](https://img.shields.io/nuget/dt/Net5WebTemplate.svg)](https://www.nuget.org/packages/Net5WebTemplate/)
 
 # .NET 5 Web Template
 A multi-project solution .NET template for creating a an enterprise level application that includes the use of Swagger, API Versioning, 
@@ -25,10 +27,14 @@ You will need the following tools:
 ### Instructions
 1. Install the latest [.NET Core 5 SDK](https://dotnet.microsoft.com/download). 
 2. Run `dotnet new --install Net5WebTemplate` to install the project template
-3. Then create a folder for your solution and cd into it.
-4. Run `dotnet new net5webtemplate --name "MyProject"` to create a new project
-5. Run `dotnet ef migrations add Initial --context <ProjectName>DbContext` to add migation with EF Core 
-6. Run `dotnet ef database update Initial` to create application database.
+3. Then navigate to the location you would like to create to project
+4. Run `dotnet new net5webtemplate -o "MyProject"` to create a new project
+
+### Database Setup
+To setup the SQL Server database following the instrcutions below:
+1. Reveiw the connection string in appsettings.Local.json and update the database name.
+2. Run `dotnet ef migrations add Initial --context <ProjectName>DbContext` to add migation with EF Core 
+3. Run `dotnet ef database update Initial` to create application database.
 
 ## Technologies and Third Party Libraries
 * .NET 5
