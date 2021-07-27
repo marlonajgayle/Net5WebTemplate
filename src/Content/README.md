@@ -20,9 +20,17 @@ You will need the following tools:
 
 ### Instructions
 1. Install the latest [.NET Core 5 SDK](https://dotnet.microsoft.com/download). 
-2. Run `dotnet new --install Net5WebTemplate` to install the project template
+2. Run `dotnet new --install Net5WebTemplate::1.0.0-preview.2` to install the project template
 3. Then navigate to the location you would like to create to project
-4. Run `dotnet new net5webtemplate -o "MyProject"` to create a new project
+4. Run `dotnet new net5webapi -o "MyProject"` to create a new project
+
+### Docker Setup
+ASP.NET Core Web API uses HTTPS and relies on certificates for trust, identity and encryption. 
+For localhost use generate certificate using 'dotnet dev-certs' (for localhost use Only!).
+Generate certificate and configure local machine
+`dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx  -p your_password
+dotnet dev-certs https --trust
+`
 
 ### Database Setup
 To setup the SQL Server database following the instrcutions below:

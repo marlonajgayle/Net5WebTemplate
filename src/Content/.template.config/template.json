@@ -4,7 +4,7 @@
   "classifications": [ ".NET 5 Web Template", "Cloud", "Web"  ],
   "identity": "marlonajgayle.net5.web.template",
   "name": "NET 5 Web Template",
-  "shortName": "net5web",
+  "shortName": "net5webapi",
   "defaultName": "Application",
   "tags": {
     "language": "C#",
