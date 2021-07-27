@@ -1,0 +1,8 @@
+.git
+.gitignore
+.gitattributes
+.template.config\
+bin\
+obj\
+LICENSE.md
+README.md
