@@ -97,7 +97,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
                 var tokenValdationParams = _tokenValidationParameters.Clone();
                 tokenValdationParams.ValidateLifetime = false;
 
-                var principal = tokenHandler.ValidateToken(token, _tokenValidationParameters, out var validatedToken);
+                var principal = tokenHandler.ValidateToken(token, tokenValdationParams, out var validatedToken);
                 if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
                 {
                     return null;
@@ -166,7 +166,7 @@ namespace Net5WebTemplate.Infrastructure.Identity
         private static bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
         {
             return (validatedToken is JwtSecurityToken jwtSecurityToken) &&
-                jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature,
+                jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
                 StringComparison.InvariantCultureIgnoreCase);
         }
 
