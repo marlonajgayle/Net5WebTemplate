@@ -1,3 +1,5 @@
+<img align="left" width="116" height="116" src="https://raw.githubusercontent.com/marlonajgayle/Net5WebTemplate/develop/src/Content/.template.config/icon.png" />
+
 # .NET 5 Web Template
 A multi-project solution .NET template for creating a an enterprise level application that includes the use of Swagger, API Versioning, 
 Localization, NLog, Fluent Validation, Fluent Email, IP Rate Limiting using the .NET 5 Framework and are guided by the Clean Architecture 
@@ -26,11 +28,22 @@ You will need the following tools:
 
 ### Docker Setup
 ASP.NET Core Web API uses HTTPS and relies on certificates for trust, identity and encryption. 
-For localhost use generate certificate using 'dotnet dev-certs' (for localhost use Only!).
-Generate certificate and configure local machine
-`dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\aspnetapp.pfx  -p your_password
+To run Net5WebTemplate application Docker over HTTPS during development do the following:
+1. Generate certificate using 'dotnet dev-certs' (for localhost use Only!).
+On Windows using Linux Containers
+```
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx  -p your_password
 dotnet dev-certs https --trust
-`
+````
+When using PowerShell, replace %USERPROFILE% with $env:USERPROFILE.
+
+On macOS or Linux
+```
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
+dotnet dev-certs https --trust
+```
+2. Build and run Docker containers run Docker compose located in the solution directory
+`docker-compose -f 'docker-compose.yml' up --build`
 
 ### Database Setup
 To setup the SQL Server database following the instrcutions below:

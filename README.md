@@ -1,3 +1,6 @@
+
+<img align="left" width="116" height="116" src="https://raw.githubusercontent.com/marlonajgayle/Net5WebTemplate/develop/src/Content/.template.config/icon.png" />
+
 [![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
 [![Build](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml)
 [![CodeQL](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml)
@@ -29,6 +32,25 @@ You will need the following tools:
 2. Run `dotnet new --install Net5WebTemplate` to install the project template
 3. Then navigate to the location you would like to create to project
 4. Run `dotnet new net5webtemplate -o "MyProject"` to create a new project
+
+### Docker Setup
+ASP.NET Core Web API uses HTTPS and relies on certificates for trust, identity and encryption. 
+To run Net5WebTemplate application Docker over HTTPS during development do the following:
+1. Generate certificate using 'dotnet dev-certs' (for localhost use Only!).
+On Windows using Linux Containers
+```
+dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx  -p your_password
+dotnet dev-certs https --trust
+````
+When using PowerShell, replace %USERPROFILE% with $env:USERPROFILE.
+
+On macOS or Linux
+```
+dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
+dotnet dev-certs https --trust
+```
+2. Build and run Docker containers run Docker compose located in the solution directory
+`docker-compose -f 'docker-compose.yml' up --build`
 
 ### Database Setup
 To setup the SQL Server database following the instrcutions below:
