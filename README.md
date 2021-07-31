@@ -1,13 +1,14 @@
 
 <img align="left" width="116" height="116" src="https://raw.githubusercontent.com/marlonajgayle/Net5WebTemplate/develop/src/Content/.template.config/icon.png" />
 
+# .NET 5 Web Template
 [![Build status](https://dev.azure.com/marlongayle/Net5WebTemplate/_apis/build/status/Net5WebTemplate-CI)](https://dev.azure.com/marlongayle/Net5WebTemplate/_build/latest?definitionId=3)
 [![Build](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/dotnet.yml)
 [![CodeQL](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml/badge.svg?branch=develop)](https://github.com/marlonajgayle/Net5WebTemplate/actions/workflows/codeql-analysis.yml)
 [![Net5WebTemplate Nuget Package](https://img.shields.io/nuget/v/Net5WebTemplate.svg)](https://www.nuget.org/packages/Net5WebTemplate/)
 [![NuGet](https://img.shields.io/nuget/dt/Net5WebTemplate.svg)](https://www.nuget.org/packages/Net5WebTemplate/)
 
-# .NET 5 Web Template
+
 A multi-project solution .NET template for creating a an enterprise level application that includes the use of Swagger, API Versioning, 
 Localization, NLog, Fluent Validation, Fluent Email, IP Rate Limiting using the .NET 5 Framework and are guided by the Clean Architecture 
 principles enabling rapid application development.
