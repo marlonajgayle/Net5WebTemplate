@@ -30,7 +30,7 @@ You will need the following tools:
 
 ### Instructions
 1. Install the latest [.NET Core 5 SDK](https://dotnet.microsoft.com/download). 
-2. Run `dotnet new --install Net5WebTemplate` to install the project template
+2. Run `dotnet new --install Net5WebTemplate::1.0.0-preview.2` to install the project template
 3. Then navigate to the location you would like to create to project
 4. Run `dotnet new net5webtemplate -o "MyProject"` to create a new project
 
@@ -38,6 +38,8 @@ You will need the following tools:
 ASP.NET Core Web API uses HTTPS and relies on certificates for trust, identity and encryption. 
 To run Net5WebTemplate application Docker over HTTPS during development do the following:
 1. Generate certificate using 'dotnet dev-certs' (for localhost use Only!).
+Note: Update the docker-compose file with dev-cert password used.
+
 On Windows using Linux Containers
 ```
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx  -p your_password
@@ -51,7 +53,9 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 2. Build and run Docker containers run Docker compose located in the solution directory
-`docker-compose -f 'docker-compose.yml' up --build`
+```
+docker-compose -f 'docker-compose.yml' up --build
+```
 
 ### Database Setup
 To setup the SQL Server database following the instrcutions below:
@@ -76,6 +80,7 @@ To setup the SQL Server database following the instrcutions below:
 
 ## Contributions
 - [Demar-j](https://github.com/Demar-j) - Implemented unit tests.
+- [mahousen](https://github.com/mahousen) - Fixed JWT validation issue.
 
 ## Credits
 This solution's structure was heavily infuenced by [Jason Taylor's](https://github.com/jasontaylordev) Clean Architecture model.
