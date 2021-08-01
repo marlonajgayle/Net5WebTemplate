@@ -38,6 +38,7 @@ You will need the following tools:
 ASP.NET Core Web API uses HTTPS and relies on certificates for trust, identity and encryption. 
 To run Net5WebTemplate application Docker over HTTPS during development do the following:
 1. Generate certificate using 'dotnet dev-certs' (for localhost use Only!).
+
 Note: Update the docker-compose file with dev-cert password used.
 
 On Windows using Linux Containers
@@ -80,7 +81,7 @@ To setup the SQL Server database following the instrcutions below:
 
 ## Contributions
 - [Demar-j](https://github.com/Demar-j) - Implemented unit tests.
-- [mahousen](https://github.com/mahousen) - Fixed JWT validation issue.
+- [mahousen](https://github.com/mahousen) - Reported JWT validation issue.
 
 ## Credits
 This solution's structure was heavily infuenced by [Jason Taylor's](https://github.com/jasontaylordev) Clean Architecture model.
